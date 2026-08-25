@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-command-bg: #0a0a0a;
+  --color-command-panel: #141414;
+  --color-command-border: #333333;
+  --color-command-text: #e0e0e0;
+  --color-command-accent: #00ffcc;
+}
+
+body {
+  background-color: var(--color-command-bg);
+  color: var(--color-command-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
