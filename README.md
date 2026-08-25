@@ -1,30 +1,31 @@
-## Post-disaster-survivor-locating-mesh-network
+Post-disaster survivor-locating mesh network 
 
+ # Frontend/Dashboard
 
-# What your project does :
+Project context (what the full system does):
+When a disaster hits — earthquake, building collapse, flood — phone towers usually go down too, so rescue teams can't call survivors and survivors can't call for help. Right now, rescuers physically search through rubble, which is slow. This project addresses that by dropping small sensor devices into a disaster area by drone. These sensors passively detect the WiFi/Bluetooth signals phones emit automatically, and triangulate a rough location once 3+ sensors detect the same phone — shown on a live map so rescuers get a "search here" zone instead of searching blindly.
 
-When a disaster hits — earthquake, building collapse, flood — the phone towers usually go down too. So rescue teams can't call survivors, and survivors can't call for help. Right now, rescuers just have to physically search through rubble, which is slow.
+My contribution — the dashboard:
+I built the live command dashboard that rescue teams would view. It's designed to take detection data (from the sensor network) and present it clearly and safely for field use.
 
-Your project fixes part of that problem. Most people trapped in rubble are still carrying a phone. Even with no signal, a phone still quietly "shouts" out looking for WiFi networks and Bluetooth devices — it does this on its own, without the person doing anything.
+Dashboard features:
 
-Your system drops small sensor devices into the disaster area (by drone). These devices listen for that quiet "shouting" from phones. Once 3 or more sensors hear the same phone, your system does some math to figure out roughly where that phone is — and shows it on a live map for rescue workers to see. So instead of searching blindly, rescuers get a rough "search here" zone.
+Live map showing sensor positions and detected signal zones, updating in real time
+Confidence circles instead of fake-exact pins — bigger circle means less certain location, so rescuers aren't misled into treating a rough estimate as precise
+Freshness color-coding — recent detections shown urgently (red), aging ones fade (amber)
+Signal table listing every active detection with position, confidence, and number of sensors that see it
+Node status panel showing sensor placement
+Clear connection-loss warning, so "no survivors detected" never looks the same as "system malfunction"
+Command-center visual design — dark, high-contrast, built for glanceability on a shared screen
 
-Here the front-end of that project 
+Technologies I used (frontend):
 
-# Features
+React — component-based interface (map, table, status panel)
+Tailwind CSS — styling
+SVG/Canvas — rendering the live map directly in-browser
+Fetch API polling — pulling live data from the backend every second
 
-- No internet or cell tower needed — the sensors talk to each other using their own radio network (LoRa), so it works even when everything else is down.
-- Detects phones passively — doesn't need the survivor to do anything, install an app, or have signal bars. Just needs the phone to be powered on.
-- Shows a "probability zone," not a fake-exact pin — since signals are noisy in rubble, your dashboard shows a circle (bigger circle = less sure), which is more honest and safer for rescuers than a misleading single dot.
-- Privacy-friendly  — your sensors scramble (hash) the phone's ID the moment they detect it, so no one's actual phone identity is ever stored or sent anywhere.
-- Live dashboard — a map that updates every second showing sensor positions and any detected survivor zones, plus a clear warning if the system itself loses connection (so no one confuses "no signal found" with "system broken").
-- Cheap and deployable fast — built from low-cost parts (~₹1,500-2,500 per sensor), light enough to be air-dropped by drone into a disaster zone within minutes.
+Technologies used elsewhere in the full system (not built by me):
 
-## Technologies used
-
-- ESP32 microcontroller — the small computer chip inside each sensor that does the actual listening for phone signals.
-- WiFi & Bluetooth sniffing — a mode built into the ESP32 that lets it "eavesdrop" on nearby phone signals without connecting to them.
-- LoRa radio (SX1276 module) — a long-range, low-power radio system the sensors use to talk to each other and send data back, even from kilometers away.
-- Python (Flask) — runs the "brain" on a laptop that receives all the readings and calculates where each phone likely is.
-- Trilateration math (via SciPy)— the same kind of math GPS uses: if you know how far away something is from 3+ points, you can estimate its exact location.
-- React / HTML dashboard — the live map interface that rescue teams actually look at, showing sensor locations and survivor zones in real time.
+ESP32 microcontrollers, WiFi/BLE sniffing, LoRa radio (SX1276) — sensor hardware layer
+Python/Flask + SciPy trilateration — backend that computes survivor position
