@@ -9,6 +9,8 @@ Your project fixes part of that problem. Most people trapped in rubble are still
 
 Your system drops small sensor devices into the disaster area (by drone). These devices listen for that quiet "shouting" from phones. Once 3 or more sensors hear the same phone, your system does some math to figure out roughly where that phone is — and shows it on a live map for rescue workers to see. So instead of searching blindly, rescuers get a rough "search here" zone.
 
+Here the front-end of that project 
+
 # Features
 
 - No internet or cell tower needed — the sensors talk to each other using their own radio network (LoRa), so it works even when everything else is down.
