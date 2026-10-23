@@ -1,0 +1,344 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-analytics: var(--analytics);
+}
+
+:root,
+.dark {
+  --radius: 0.625rem;
+  --background: #0b1120;
+  --foreground: #f1f5f9;
+  --card: #111c2f;
+  --card-foreground: #f1f5f9;
+  --popover: #182438;
+  --popover-foreground: #f1f5f9;
+  --primary: #38bdf8;
+  --primary-foreground: #0b1120;
+  --secondary: #182438;
+  --secondary-foreground: #f1f5f9;
+  --muted: #182438;
+  --muted-foreground: #94a3b8;
+  --accent: #182438;
+  --accent-foreground: #38bdf8;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #263449;
+  --input: #263449;
+  --ring: #38bdf8;
+  --navy: #0b1120;
+  --navy-foreground: #f1f5f9;
+  --critical: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --info: #38bdf8;
+  --analytics: #a78bfa;
+  --grid-line: #1e293b;
+  --map-surface: #0b1120;
+  --chart-1: #38bdf8;
+  --chart-2: #a78bfa;
+  --chart-3: #f59e0b;
+  --chart-4: #ef4444;
+  --chart-5: #22c55e;
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #38bdf8;
+  --sidebar-primary-foreground: #0b1120;
+  --sidebar-accent: #182438;
+  --sidebar-accent-foreground: #38bdf8;
+  --sidebar-border: #263449;
+  --sidebar-ring: #38bdf8;
+  --shadow-panel: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --signal-glow: drop-shadow(0 0 6px rgba(56, 189, 248, 0.45));
+  --scene-sky: #0b1120;
+  --scene-ground: #1e293b;
+  --scene-grid: #334155;
+  --scene-concrete: #64748b;
+  --scene-metal: #475569;
+  --scene-water: #0284c7;
+  --scene-primary: #38bdf8;
+  --scene-warning: #f59e0b;
+  --scene-critical: #ef4444;
+  --scene-info: #38bdf8;
+  --scene-success: #22c55e;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-critical: var(--critical);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-info: var(--info);
+  --color-analytics: var(--analytics);
+  --color-map-surface: var(--map-surface);
+  --color-grid-line: var(--grid-line);
+}
+
+@utility panel {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+@utility mono-num {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, "SFMono-Regular", "Menlo", monospace;
+}
+
+@keyframes kavach-ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@utility zone-pulse {
+  animation: kavach-ping 2.4s ease-out infinite;
+}
+
+@keyframes kavach-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility fade-in-up {
+  animation: kavach-fade-in 0.28s ease-out both;
+}
+
+@theme {
+  --font-sans: "IBM Plex Sans", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
+body {
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+.trace-label {
+  font-family: ui-monospace, monospace;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+.trace-heading {
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.trace-map {
+  min-height: 390px;
+  height: 450px;
+  border: 1px solid var(--border);
+}
+.trace-map svg {
+  display: block;
+}
+.packet-link {
+  stroke-dasharray: 5 26;
+  animation: packet-flow 5s linear infinite;
+  filter: var(--signal-glow);
+}
+.node-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-breathe 3s ease-in-out infinite;
+}
+.zone-scan {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: radar-scan 9s linear infinite;
+}
+.estimate-circle {
+  transition:
+    cx 1.1s ease,
+    cy 1.1s ease,
+    r 1.1s ease;
+}
+@keyframes packet-flow {
+  to {
+    stroke-dashoffset: -155;
+  }
+}
+@keyframes node-breathe {
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes radar-scan {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes event-arrival {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.event-arrival {
+  animation: event-arrival 0.35s ease-out;
+}
+.trace-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.trace-table th {
+  text-align: left;
+  color: var(--muted-foreground);
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 12px;
+  background: var(--secondary);
+}
+.trace-table td {
+  padding: 13px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.trace-table tr:hover td {
+  background: var(--secondary);
+}
+.trace-chart {
+  height: 230px;
+  min-width: 0;
+}
+input[type="range"] {
+  accent-color: var(--primary);
+}
+.trace-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+@media (max-width: 640px) {
+  .trace-heading {
+    font-size: 24px;
+  }
+  .trace-map {
+    height: 390px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media print {
+  .no-print,
+  aside,
+  header,
+  [data-sonner-toaster] {
+    display: none !important;
+  }
+  body,
+  .print-report {
+    background: var(--foreground) !important;
+    color: var(--background) !important;
+  }
+  .print-report {
+    padding: 24px;
+  }
+  .print-report * {
+    color: var(--background) !important;
+    border-color: var(--muted-foreground) !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+}
