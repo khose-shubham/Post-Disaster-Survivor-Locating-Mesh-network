@@ -406,7 +406,7 @@ export function MapCanvas({
         preserveAspectRatio="xMidYMid slice"
         className="h-full w-full touch-none cursor-grab active:cursor-grabbing"
         role="img"
-        aria-label="TRACE Unified Tactical Map"
+        aria-label="KAVACH Unified Tactical Map"
         onPointerDown={(e) => {
           const point = eventPoint(e);
           if (!point) return;

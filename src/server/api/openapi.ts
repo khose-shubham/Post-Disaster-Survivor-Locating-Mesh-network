@@ -1,13 +1,13 @@
 export const OPENAPI_SPEC = {
   openapi: "3.1.0",
   info: {
-    title: "TRACE Operational Rescue REST API",
+    title: "KAVACH Operational Rescue REST API",
     version: "8.0.0",
     description:
       "Production-oriented REST API and Telemetry Ingestion Boundary for Triangulated Rescue Aid via Crowd-Signal Estimation.",
     contact: {
-      name: "TRACE Research Team",
-      url: "https://trace-rescue.internal",
+      name: "KAVACH Research Team",
+      url: "https://kavach-rescue.internal",
     },
   },
   servers: [

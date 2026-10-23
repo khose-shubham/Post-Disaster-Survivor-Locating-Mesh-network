@@ -270,7 +270,7 @@ export interface LocalizationResult {
   confidence: number;
 }
 
-export const ESTIMATOR_VERSION = "TRACE-EST-V6.1-GDOP";
+export const ESTIMATOR_VERSION = "KAVACH-EST-V6.1-GDOP";
 
 export type LocalizationFailureReason =
   | "insufficient_nodes"

@@ -4,7 +4,7 @@ type ErrorOptions = {
   severity?: "error" | "warning" | "info";
 };
 
-type TraceTelemetry = {
+type KavachTelemetry = {
   captureException?: (
     error: unknown,
     context?: Record<string, unknown>,
@@ -14,8 +14,8 @@ type TraceTelemetry = {
 
 declare global {
   interface Window {
-    __traceEvents?: TraceTelemetry;
-    __traceReportRuntimeError?: (payload: {
+    __kavachEvents?: KavachTelemetry;
+    __kavachReportRuntimeError?: (payload: {
       message: string;
       stack?: string;
       filename?: string;
@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-export function reportTraceError(error: unknown, context: Record<string, unknown> = {}) {
+export function reportKavachError(error: unknown, context: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
 
   const message =
@@ -34,7 +34,7 @@ export function reportTraceError(error: unknown, context: Record<string, unknown
         : String(error);
   const stack = error instanceof Error ? error.stack : undefined;
 
-  window.__traceEvents?.captureException?.(
+  window.__kavachEvents?.captureException?.(
     error,
     {
       source: "react_error_boundary",
@@ -48,7 +48,7 @@ export function reportTraceError(error: unknown, context: Record<string, unknown
     },
   );
 
-  window.__traceReportRuntimeError?.({
+  window.__kavachReportRuntimeError?.({
     message,
     ...(stack !== undefined && { stack }),
     filename: window.location.pathname,

@@ -79,7 +79,7 @@ export function TacticalScene(props: Props) {
       {k.sceneMode === "2d" ? (
         <MapCanvas {...props} />
       ) : (
-        <div className={`relative overflow-hidden rounded-xl border border-slate-800/90 shadow-md ${props.className ?? "trace-map"}`}>
+        <div className={`relative overflow-hidden rounded-xl border border-slate-800/90 shadow-md ${props.className ?? "kavach-map"}`}>
           {mounted && (
             <SceneBoundary
               fallback={
@@ -93,7 +93,7 @@ export function TacticalScene(props: Props) {
             >
               <Suspense
                 fallback={
-                  <div className="h-full grid place-items-center text-primary trace-label">
+                  <div className="h-full grid place-items-center text-primary kavach-label">
                     Loading tactical scene…
                   </div>
                 }
@@ -104,7 +104,7 @@ export function TacticalScene(props: Props) {
           )}
           <div className="absolute left-3 top-3 pointer-events-none rounded-lg bg-slate-950/85 backdrop-blur-md border border-slate-800/80 px-2.5 py-1.5 shadow-md">
             <p className="text-[9px] font-mono tracking-wider font-semibold text-sky-400 uppercase">
-              TRACE · {k.incidents.find(i => i.id === k.incidentId)?.name ?? "SECTOR DELTA"}
+              KAVACH · {k.incidents.find(i => i.id === k.incidentId)?.name ?? "SECTOR DELTA"}
             </p>
             <p className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 mt-0.5">
               <span className={cn("h-1.5 w-1.5 rounded-full", k.gatewayConnected ? "bg-emerald-400" : "bg-rose-400 animate-pulse")} />
@@ -335,7 +335,7 @@ export function DemoWalkthrough() {
         >
           <div className="flex justify-between gap-3">
             <div>
-              <p className="trace-label text-primary">
+              <p className="kavach-label text-primary">
                 WALKTHROUGH {Number(step) + 1} / {steps.length} · SIMULATION PAUSED
               </p>
               <h2 className="text-sm font-semibold mt-2">{current.title}</h2>

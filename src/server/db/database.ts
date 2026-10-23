@@ -34,7 +34,7 @@ export function getDatabasePath(): string {
       return ":memory:";
     }
   }
-  return path.join(dataDir, "trace.db");
+  return path.join(dataDir, "kavach.db");
 }
 
 export function getDb(): DatabaseSync {
@@ -58,10 +58,10 @@ export function getDb(): DatabaseSync {
 
     return dbInstance;
   } catch (err) {
-    console.error("[TRACE DB] Failed to initialize SQLite database at", dbPath, err);
+    console.error("[KAVACH DB] Failed to initialize SQLite database at", dbPath, err);
     // If opening file failed, fallback gracefully to in-memory
     if (dbPath !== ":memory:") {
-      console.warn("[TRACE DB] Falling back to in-memory database.");
+      console.warn("[KAVACH DB] Falling back to in-memory database.");
       dbInstance = new DatabaseSync(":memory:");
       dbInstance.exec("PRAGMA foreign_keys = ON;");
       initSchema(dbInstance);
@@ -182,7 +182,7 @@ function seedInitialDemoData(db: DatabaseSync): void {
   insertUser.run(
     "USR-ADMIN-01",
     "admin",
-    "admin@trace-rescue.internal",
+    "admin@kavach-rescue.internal",
     adminCreds.hash,
     adminCreds.salt,
     "Administrator",
@@ -193,7 +193,7 @@ function seedInitialDemoData(db: DatabaseSync): void {
   insertUser.run(
     "USR-CMD-01",
     "commander",
-    "commander@trace-rescue.internal",
+    "commander@kavach-rescue.internal",
     commanderCreds.hash,
     commanderCreds.salt,
     "Incident Commander",
@@ -204,7 +204,7 @@ function seedInitialDemoData(db: DatabaseSync): void {
   insertUser.run(
     "USR-RESP-01",
     "responder",
-    "responder@trace-rescue.internal",
+    "responder@kavach-rescue.internal",
     responderCreds.hash,
     responderCreds.salt,
     "Responder",
@@ -215,7 +215,7 @@ function seedInitialDemoData(db: DatabaseSync): void {
   insertUser.run(
     "USR-ANALYST-01",
     "analyst",
-    "analyst@trace-rescue.internal",
+    "analyst@kavach-rescue.internal",
     analystCreds.hash,
     analystCreds.salt,
     "Analyst",
@@ -226,7 +226,7 @@ function seedInitialDemoData(db: DatabaseSync): void {
   insertUser.run(
     "USR-VIEW-01",
     "viewer",
-    "viewer@trace-rescue.internal",
+    "viewer@kavach-rescue.internal",
     viewerCreds.hash,
     viewerCreds.salt,
     "Viewer",

@@ -1,4 +1,4 @@
-# TRACE — Complete 3-Node & 1-Gateway Arduino IDE Setup Guide
+# KAVACH — Complete 3-Node & 1-Gateway Arduino IDE Setup Guide
 
 This guide walks you step-by-step through setting up, wiring, configuring, and flashing **3 Field Sniffer Nodes** (`NODE-N01`, `NODE-N02`, `NODE-N03`) and **1 Master Gateway Concentrator** (`GW-PRIMARY-ALPHA`) using the **Arduino IDE**.
 
@@ -11,7 +11,7 @@ This guide walks you step-by-step through setting up, wiring, configuring, and f
 | **Node 1** | North-East Anchor Station | ESP32 DevKit + SX1276/SX1278 (or SX1262) | `firmware/node1_sniffer/node1_sniffer.ino` |
 | **Node 2** | North-West Anchor Station | ESP32 DevKit + SX1276/SX1278 (or SX1262) | `firmware/node2_sniffer/node2_sniffer.ino` |
 | **Node 3** | South-East Anchor Station | ESP32 DevKit + SX1276/SX1278 (or SX1262) | `firmware/node3_sniffer/node3_sniffer.ino` |
-| **Gateway** | Master LoRa Receiver & PC Bridge | ESP32 DevKit + SX1276/SX1278 (or SX1262) | `firmware/trace_gateway/trace_gateway.ino` |
+| **Gateway** | Master LoRa Receiver & PC Bridge | ESP32 DevKit + SX1276/SX1278 (or SX1262) | `firmware/kavach_gateway/kavach_gateway.ino` |
 
 ---
 
@@ -73,7 +73,7 @@ Go to **Sketch -> Include Library -> Manage Libraries...** (or `Ctrl + Shift + I
 5. Click **Upload** (`Ctrl + U`).
 6. Once uploaded, open the **Serial Monitor** (115200 baud). You will see:
    ```text
-   TRACE Field Anchor: NODE-N01 (North-East)
+   KAVACH Field Anchor: NODE-N01 (North-East)
    [LORA] OK: Radio initialized successfully
    [SYS] NODE-N01 ready.
    [LORA TX OK] -> {"deviceId":"NODE-N01","seq":1001,"latitude":19.876380,...}
@@ -101,34 +101,34 @@ Go to **Sketch -> Include Library -> Manage Libraries...** (or `Ctrl + Shift + I
 
 1. Plug in your **fourth ESP32** (Gateway).
 2. Open:
-   `firmware/trace_gateway/trace_gateway.ino`
+   `firmware/kavach_gateway/kavach_gateway.ino`
 3. Under **Tools -> Board**, select **ESP32 Dev Module**.
 4. Select the COM port.
 5. Click **Upload** (`Ctrl + U`).
 6. Open the **Serial Monitor** at **115200 baud**. You will see:
    ```text
-   TRACE Master LoRa Gateway Concentrator Bridge
+   KAVACH Master LoRa Gateway Concentrator Bridge
    {"type":"gateway_boot","gatewayId":"GW-PRIMARY-ALPHA","status":"online","freq":868.1,"sf":7,"bw":125}
    ```
 7. When Node 1, Node 2, or Node 3 transmit over LoRa, the Gateway immediately receives and outputs formatted telemetry JSON lines!
 
 ---
 
-## 6. Connecting Hardware to the TRACE Dashboard
+## 6. Connecting Hardware to the KAVACH Dashboard
 
 Leave your Gateway ESP32 plugged into your PC via USB.
 
 ### Method A: Using the Python Gateway Companion Daemon (Recommended)
 From the project root in your terminal, run:
 ```bash
-python scripts/trace_gateway_daemon.py --port COM4 --baud 115200
+python scripts/kavach_gateway_daemon.py --port COM4 --baud 115200
 ```
 *(Replace `COM4` with your Gateway's actual COM port).*
 
-The daemon automatically reads incoming packets from the Gateway and streams them to the local TRACE web server (`http://localhost:8080/api/telemetry/ingest`).
+The daemon automatically reads incoming packets from the Gateway and streams them to the local KAVACH web server (`http://localhost:8080/api/telemetry/ingest`).
 
 ### Method B: Using Web Serial directly in your Browser (No Python Needed!)
-1. Open the TRACE web application: `http://localhost:8080/settings`.
+1. Open the KAVACH web application: `http://localhost:8080/settings`.
 2. Scroll to the **Web Serial Diagnostic Port** card.
 3. Click **Pair USB Device**.
 4. Select your ESP32 Gateway from the browser pop-up.

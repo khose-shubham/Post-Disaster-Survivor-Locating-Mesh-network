@@ -1,4 +1,4 @@
-/** TRACE V7 Operational REST API Ingress Boundary & Contract Specifications */
+/** KAVACH V7 Operational REST API Ingress Boundary & Contract Specifications */
 export const API_CONTRACT = [
   [
     "POST",
@@ -20,7 +20,7 @@ export const API_CONTRACT = [
       x: -120,
       y: 90,
       battery: 88,
-      firmware: "trace-1.0",
+      firmware: "kavach-1.0",
       packetsReceived: 126,
       packetsLost: 2,
       timestamp: "2026-10-12T13:12:00Z",
@@ -90,7 +90,7 @@ export const API_CONTRACT = [
   ["GET", "/api/v1/survivors", { survivors: [] }],
 ] as const;
 
-export function createTraceApi(baseUrl: string) {
+export function createKavachApi(baseUrl: string) {
   async function read(path: string) {
     if (!baseUrl.trim()) throw new Error("No hardware API configured");
     const base = new URL(baseUrl);

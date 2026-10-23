@@ -33,7 +33,7 @@ const CORS_HEADERS: Record<string, string> = {
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
   "access-control-allow-headers":
-    "Content-Type, Authorization, X-Trace-Gateway-Secret, X-Trace-Gateway-Id",
+    "Content-Type, Authorization, X-Kavach-Gateway-Secret, X-Kavach-Gateway-Id",
 };
 
 export function jsonResponse(
@@ -72,9 +72,9 @@ export async function handleApiRouter(request: Request, url: URL): Promise<Respo
     const now = Date.now();
     return jsonResponse({
       status: "healthy",
-      service: "TRACE Operational Backend",
+      service: "KAVACH Operational Backend",
       version: "8.0.0",
-      estimatorVersion: "TRACE-EST-V6.1-GDOP",
+      estimatorVersion: "KAVACH-EST-V6.1-GDOP",
       uptimeSeconds: Math.round((now - serverStartTime) / 1000),
       timestamp: now,
       environment: "production",
@@ -115,7 +115,7 @@ export async function handleApiRouter(request: Request, url: URL): Promise<Respo
           }
         };
 
-        eventBus.on("trace_event", listener);
+        eventBus.on("kavach_event", listener);
 
         // Keep-alive heartbeat every 20 seconds
         const heartbeat = setInterval(() => {
@@ -127,7 +127,7 @@ export async function handleApiRouter(request: Request, url: URL): Promise<Respo
         }, 20000);
 
         request.signal?.addEventListener("abort", () => {
-          eventBus.off("trace_event", listener);
+          eventBus.off("kavach_event", listener);
           clearInterval(heartbeat);
           try {
             controller.close();
@@ -177,7 +177,7 @@ export async function handleApiRouter(request: Request, url: URL): Promise<Respo
     }
 
     // Set HttpOnly cookie
-    const cookie = `trace_session=${result.token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`;
+    const cookie = `kavach_session=${result.token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`;
     return jsonResponse(
       {
         message: "Login successful",
@@ -194,7 +194,7 @@ export async function handleApiRouter(request: Request, url: URL): Promise<Respo
     if (auth.token) {
       AuthService.logout(auth.token);
     }
-    const clearCookie = `trace_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
+    const clearCookie = `kavach_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
     return jsonResponse({ message: "Logout successful" }, 200, { "set-cookie": clearCookie });
   }
 

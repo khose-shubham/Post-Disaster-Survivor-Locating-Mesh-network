@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/reports")({
   head: () => ({
     meta: [
-      { title: "TRACE — Incident Reports" },
+      { title: "KAVACH — Incident Reports" },
       {
         name: "description",
         content:
-          "TRACE Incident Reports: disaster-response research operations with clear simulation and hardware provenance.",
+          "KAVACH Incident Reports: disaster-response research operations with clear simulation and hardware provenance.",
       },
-      { property: "og:title", content: "TRACE — Incident Reports" },
+      { property: "og:title", content: "KAVACH — Incident Reports" },
       {
         property: "og:description",
         content: "Incident Reports for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -18,5 +18,5 @@ export const Route = createFileRoute("/reports")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="reports" />,
+  component: () => <KavachView view="reports" />,
 });

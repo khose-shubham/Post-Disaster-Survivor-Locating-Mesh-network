@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/topology")({
   head: () => ({
     meta: [
-      { title: "TRACE — Network Topology" },
+      { title: "KAVACH — Network Topology" },
       {
         name: "description",
         content:
-          "TRACE Network Topology: disaster-response research operations with clear simulation and hardware provenance.",
+          "KAVACH Network Topology: disaster-response research operations with clear simulation and hardware provenance.",
       },
-      { property: "og:title", content: "TRACE — Network Topology" },
+      { property: "og:title", content: "KAVACH — Network Topology" },
       {
         property: "og:description",
         content: "Network Topology for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -18,5 +18,5 @@ export const Route = createFileRoute("/topology")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="topology" />,
+  component: () => <KavachView view="topology" />,
 });

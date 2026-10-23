@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TRACE — Disaster Response Command" },
+      { title: "KAVACH — Disaster Response Command" },
       {
         name: "description",
         content:
-          "TRACE rescue command: anonymous signal estimation, tactical local map and clearly labeled disaster-response simulation.",
+          "KAVACH rescue command: anonymous signal estimation, tactical local map and clearly labeled disaster-response simulation.",
       },
-      { property: "og:title", content: "TRACE — Disaster Response Command" },
+      { property: "og:title", content: "KAVACH — Disaster Response Command" },
       {
         property: "og:description",
         content:
@@ -19,5 +19,5 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="overview" />,
+  component: () => <KavachView view="overview" />,
 });

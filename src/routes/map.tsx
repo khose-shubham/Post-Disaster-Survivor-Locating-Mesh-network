@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/map")({
   head: () => ({
     meta: [
-      { title: "TRACE — Live Tactical Map" },
+      { title: "KAVACH — Live Tactical Map" },
       {
         name: "description",
         content:
-          "TRACE Live Tactical Map: disaster-response research operations with clear simulation and hardware provenance.",
+          "KAVACH Live Tactical Map: disaster-response research operations with clear simulation and hardware provenance.",
       },
-      { property: "og:title", content: "TRACE — Live Tactical Map" },
+      { property: "og:title", content: "KAVACH — Live Tactical Map" },
       {
         property: "og:description",
         content: "Live Tactical Map for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -18,5 +18,5 @@ export const Route = createFileRoute("/map")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="map" />,
+  component: () => <KavachView view="map" />,
 });

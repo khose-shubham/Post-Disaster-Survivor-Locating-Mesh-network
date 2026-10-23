@@ -32,7 +32,7 @@ const CORS_HEADERS = {
   "content-type": "application/json; charset=utf-8",
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "access-control-allow-headers": "Content-Type, Authorization, X-Trace-Gateway-Id",
+  "access-control-allow-headers": "Content-Type, Authorization, X-Kavach-Gateway-Id",
 };
 
 function jsonResponse(data: unknown, status = 200): Response {
@@ -145,9 +145,9 @@ export async function handleApiV1Request(request: Request, url: URL): Promise<Re
     const now = Date.now();
     return jsonResponse({
       status: "healthy",
-      service: "TRACE Operational Backend Ingress",
+      service: "KAVACH Operational Backend Ingress",
       version: "7.0.0",
-      estimatorVersion: "TRACE-EST-V6.1-GDOP",
+      estimatorVersion: "KAVACH-EST-V6.1-GDOP",
       timestamp: now,
       uptimeSeconds: Math.round((now - serverStartTime) / 1000),
       environment: "edge-ssr",
@@ -344,7 +344,7 @@ export async function handleApiV1Request(request: Request, url: URL): Promise<Re
   return jsonResponse(
     {
       error: "Not Found",
-      message: `Endpoint ${method} ${path} does not exist in TRACE API v1 contract.`,
+      message: `Endpoint ${method} ${path} does not exist in KAVACH API v1 contract.`,
       documentation: "/api-docs",
     },
     404,

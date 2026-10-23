@@ -1,8 +1,8 @@
-# TRACE Simulation Engine & Scenario Presets
+# KAVACH Simulation Engine & Scenario Presets
 
 ## 1. Simulation Architecture & Data Isolation
 
-The TRACE simulation engine models a multi-node RF sensing deployment in collapsed urban environments. It exercises the exact same math, ingestion, validation, and search-zone estimation pipeline used by live physical hardware.
+The KAVACH simulation engine models a multi-node RF sensing deployment in collapsed urban environments. It exercises the exact same math, ingestion, validation, and search-zone estimation pipeline used by live physical hardware.
 
 ### Non-Negotiable Isolation Constraints:
 1. **Mode Separation:** The platform maintains an explicit mode flag: `mode: "simulation" | "live"`.
@@ -36,7 +36,7 @@ The simulator supports 10 reproducible operational scenarios:
 To feed simulated packets directly into the ingestion API without a browser UI:
 
 ```bash
-python scripts/trace_gateway_daemon.py --simulate --rate 2.0 --api-key trace_dev_gateway_secret_2026
+python scripts/kavach_gateway_daemon.py --simulate --rate 2.0 --api-key kavach_dev_gateway_secret_2026
 ```
 
 This streams synthetic LoRa frames through the full network stack, verifying the JSON parser, deduplication filter, and SSE real-time broadcast.

@@ -1,5 +1,5 @@
 /**
- * TRACE Production Relational Schema Definition
+ * KAVACH Production Relational Schema Definition
  * Compliant with Section 3 requirements for SQLite & PostgreSQL compatibility.
  */
 

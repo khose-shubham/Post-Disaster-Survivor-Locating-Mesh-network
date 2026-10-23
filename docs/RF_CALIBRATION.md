@@ -1,8 +1,8 @@
-# TRACE RF Path-Loss Calibration Guide
+# KAVACH RF Path-Loss Calibration Guide
 
 ## 1. Mathematical Foundation
 
-The TRACE distance estimation engine translates Received Signal Strength Indicator (RSSI) measurements into approximate radial distances using the Log-Distance Path-Loss Model:
+The KAVACH distance estimation engine translates Received Signal Strength Indicator (RSSI) measurements into approximate radial distances using the Log-Distance Path-Loss Model:
 
 $$\text{RSSI}(d) = A_0 - 10 \cdot n \cdot \log_{10}\left(\frac{d}{d_0}\right) + X_\sigma$$
 

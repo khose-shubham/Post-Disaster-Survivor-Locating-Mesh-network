@@ -711,7 +711,7 @@ export function KavachProvider({ children }: { children: ReactNode }) {
             lastPacket: 0,
             sensorHealth: { gps: "ok", mic: "ok", vibration: "ok", thermal: "ok", lora: "ok" },
             hops: 1,
-            firmware: "trace-demo 1.0",
+            firmware: "kavach-demo 1.0",
             uptime: 0,
             packetsReceived: 0,
             packetsLost: 0,

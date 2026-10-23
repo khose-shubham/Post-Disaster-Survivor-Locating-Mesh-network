@@ -1,18 +1,18 @@
-# TRACE Hardware Inventory & Board Assignment Specification
+# KAVACH Hardware Inventory & Board Assignment Specification
 
-This document details the hardware allocation, confirmed components, physical roles, radio configurations, and verification statuses for the three ESP32-class microcontroller units in the TRACE disaster-response research testbed.
+This document details the hardware allocation, confirmed components, physical roles, radio configurations, and verification statuses for the three ESP32-class microcontroller units in the KAVACH disaster-response research testbed.
 
 ---
 
 ## 1. Executive Summary & Hardware Verification Status
 
-The TRACE physical IoT tier is designed around **three ESP32-class development boards**. Based on physical component availability and transceiver architecture, two primary deployment topologies are supported:
+The KAVACH physical IoT tier is designed around **three ESP32-class development boards**. Based on physical component availability and transceiver architecture, two primary deployment topologies are supported:
 
 - **Topology A (2 Sniffers + 1 Concentrator Gateway)**:
   - Board 1 (`GW-01`): USB LoRa Concentrator & Host Bridge
   - Board 2 (`NODE-N01`): Structural Perimeter RF Sniffer Station
   - Board 3 (`NODE-N02`): Void / Debris RF Sniffer Station
-  *(Requires host-side Python companion daemon `scripts/trace_gateway_daemon.py` or Web Serial API).*
+  *(Requires host-side Python companion daemon `scripts/kavach_gateway_daemon.py` or Web Serial API).*
 - **Topology B (3 Field Sniffer Anchors + Direct Wi-Fi/Ethernet Host Ingress)**:
   - Board 1 (`NODE-N01`): Anchor Station 1 (Perimeter Alpha)
   - Board 2 (`NODE-N02`): Anchor Station 2 (Perimeter Beta)
@@ -43,8 +43,8 @@ The TRACE physical IoT tier is designed around **three ESP32-class development b
   | `DIO1 / DIO0` | GPIO 14 | Packet Arrival Interrupt |
   | `BUSY` | GPIO 27 | Radio State Busy Line (SX1262 only; unused on SX1276) |
 - **Power Arrangement:** 5.0V DC via Micro-USB / USB-C from Host Command Terminal.
-- **Communication Method:** High-speed USB UART serial bridge at 115,200 baud streaming versioned JSON envelopes (`scripts/trace_gateway_daemon.py`).
-- **Firmware Target:** `firmware/trace_gateway/trace_gateway.ino` (PlatformIO env: `gateway`).
+- **Communication Method:** High-speed USB UART serial bridge at 115,200 baud streaming versioned JSON envelopes (`scripts/kavach_gateway_daemon.py`).
+- **Firmware Target:** `firmware/kavach_gateway/kavach_gateway.ino` (PlatformIO env: `gateway`).
 - **Verification Status:** `IMPLEMENTED AND VERIFIED` (daemon and parser verified with 83 automated test suites; physical board flashing `REQUIRES PHYSICAL HARDWARE`).
 
 ---
@@ -74,7 +74,7 @@ The TRACE physical IoT tier is designed around **three ESP32-class development b
   | `VBAT_ADC` | GPIO 35 | Battery Voltage Divider (0-3.3V mapped to 0-4.2V cell) |
 - **Power Arrangement:** 3.7V 18650 Li-ion cell (2600 mAh) with TP4056 charge controller and 3.3V LDO regulator.
 - **Communication Method:** Uplink LoRa packets (`type: "telemetry"`) broadcast to `GW-01`.
-- **Firmware Target:** `firmware/trace_sniffer/trace_sniffer.ino` (PlatformIO env: `sniffer`).
+- **Firmware Target:** `firmware/kavach_sniffer/kavach_sniffer.ino` (PlatformIO env: `sniffer`).
 - **Verification Status:** `IMPLEMENTED AND VERIFIED` (firmware sketch complete; physical deployment `REQUIRES PHYSICAL HARDWARE`).
 
 ---
@@ -82,7 +82,7 @@ The TRACE physical IoT tier is designed around **three ESP32-class development b
 ### Board 3: Sensor / Sniffer Anchor Node 2 (`NODE-N02`)
 
 - **Confirmed Model:** ESP32-WROOM-32 (30-pin DevKit).
-- **Assigned Role:** Debris Perimeter Sniffer Anchor (South-East Sector) OR Reference Casualty Test Beacon (`TRACE-BEACON-01`).
+- **Assigned Role:** Debris Perimeter Sniffer Anchor (South-East Sector) OR Reference Casualty Test Beacon (`KAVACH-BEACON-01`).
 - **Available Radios:**
   - 2.4 GHz Promiscuous BLE Scanner / BLE Test Transmitter (+3 dBm EIRP).
   - 2.4 GHz Wi-Fi Sniffer (probe request detection).
@@ -93,7 +93,7 @@ The TRACE physical IoT tier is designed around **three ESP32-class development b
 - **Confirmed GPIO Assignments:** Identical to Board 2 for modular field replacement.
 - **Power Arrangement:** 3.7V 18650 Li-ion cell (2600 mAh).
 - **Communication Method:** LoRa telemetry uplink to `GW-01` or direct BLE test beacon transmissions.
-- **Firmware Target:** `firmware/trace_sniffer/trace_sniffer.ino` or `firmware/trace_beacon/trace_beacon.ino` (PlatformIO env: `beacon`).
+- **Firmware Target:** `firmware/kavach_sniffer/kavach_sniffer.ino` or `firmware/kavach_beacon/kavach_beacon.ino` (PlatformIO env: `beacon`).
 - **Verification Status:** `IMPLEMENTED AND VERIFIED` (firmware sketch complete; physical flashing `REQUIRES PHYSICAL HARDWARE`).
 
 ---

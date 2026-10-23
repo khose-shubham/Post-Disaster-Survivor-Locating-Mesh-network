@@ -1,6 +1,6 @@
-# TRACE Physical Hardware Test & Commissioning Checklist
+# KAVACH Physical Hardware Test & Commissioning Checklist
 
-This checklist must be executed by field engineers when deploying physical ESP32 hardware for TRACE operations.
+This checklist must be executed by field engineers when deploying physical ESP32 hardware for KAVACH operations.
 
 ---
 
@@ -14,11 +14,11 @@ This checklist must be executed by field engineers when deploying physical ESP32
 
 ## Step 1: Flashing & Serial Diagnostics
 
-- [ ] **Board 1 (Gateway):** Flash `firmware/trace_gateway/trace_gateway.ino`.
-  - Expected serial output at 115,200 baud: `[TRACE_GW] SX1262 Initialized on 868.10 MHz SF7 BW125. Ready.`
-- [ ] **Board 2 (Sniffer 1):** Flash `firmware/trace_sniffer/trace_sniffer.ino` with `NODE_ID = "NODE-N01"`.
-  - Expected serial output: `[TRACE_SNIFFER] BLE promiscuous scanner active. LoRa uplink ready.`
-- [ ] **Board 3 (Sniffer 2):** Flash `firmware/trace_sniffer/trace_sniffer.ino` with `NODE_ID = "NODE-N02"`.
+- [ ] **Board 1 (Gateway):** Flash `firmware/kavach_gateway/kavach_gateway.ino`.
+  - Expected serial output at 115,200 baud: `[KAVACH_GW] SX1262 Initialized on 868.10 MHz SF7 BW125. Ready.`
+- [ ] **Board 2 (Sniffer 1):** Flash `firmware/kavach_sniffer/kavach_sniffer.ino` with `NODE_ID = "NODE-N01"`.
+  - Expected serial output: `[KAVACH_SNIFFER] BLE promiscuous scanner active. LoRa uplink ready.`
+- [ ] **Board 3 (Sniffer 2):** Flash `firmware/kavach_sniffer/kavach_sniffer.ino` with `NODE_ID = "NODE-N02"`.
 
 ---
 
@@ -27,13 +27,13 @@ This checklist must be executed by field engineers when deploying physical ESP32
 - [ ] Plug Gateway USB cable into host workstation.
 - [ ] Execute port scan:
   ```bash
-  python scripts/trace_gateway_daemon.py --list-ports
+  python scripts/kavach_gateway_daemon.py --list-ports
   ```
 - [ ] Start daemon bridge:
   ```bash
-  python scripts/trace_gateway_daemon.py --port COM3 --baud 115200 --api-key trace_dev_gateway_secret_2026
+  python scripts/kavach_gateway_daemon.py --port COM3 --baud 115200 --api-key kavach_dev_gateway_secret_2026
   ```
-- [ ] Verify in TRACE Command Center:
+- [ ] Verify in KAVACH Command Center:
   - Header indicator transitions to `Gateway Online (LoRa 868.1 MHz)`.
   - Host bridge reports `HTTP 200 OK` on `/api/telemetry/ingest`.
 
@@ -43,15 +43,15 @@ This checklist must be executed by field engineers when deploying physical ESP32
 
 - [ ] Power on Sniffer `NODE-N01` via Li-ion battery.
 - [ ] Observe gateway serial log: verify LoRa frame reception with valid CRC, RSSI (e.g., $-72\text{ dBm}$), and SNR ($> +6\text{ dB}$).
-- [ ] Verify node appearance in TRACE `/devices` table with genuine last seen timestamp.
-- [ ] Activate a mobile BLE device or test beacon (`TRACE-BEACON-01`).
+- [ ] Verify node appearance in KAVACH `/devices` table with genuine last seen timestamp.
+- [ ] Activate a mobile BLE device or test beacon (`KAVACH-BEACON-01`).
 - [ ] Verify detected MAC / UUID appears in the Live Signal Feed.
 
 ---
 
 ## Step 4: Empirical RF Calibration Run
 
-- [ ] Navigate to `/calibration` in the TRACE web interface.
+- [ ] Navigate to `/calibration` in the KAVACH web interface.
 - [ ] Place test beacon at exactly $1.0\text{ m}$ from Sniffer. Click `Sample Live Hardware`. Record observed RSSI as $A_0$.
 - [ ] Move test beacon to $3.0\text{ m}, 5.0\text{ m}$, and $10.0\text{ m}$. Record observed RSSI.
 - [ ] Verify regression metrics: $R^2 \ge 0.85$, $1.8 \le n \le 4.5$, $\text{RMSE} \le 3.5\text{ dB}$.

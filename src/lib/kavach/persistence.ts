@@ -1,5 +1,5 @@
 /**
- * TRACE Operational Persistence Module
+ * KAVACH Operational Persistence Module
  *
  * Provides verified client-side local storage persistence for operational records:
  * - Rescue operations and audit histories
@@ -14,7 +14,7 @@
 import type { AppEvent, ConfirmedSurvivorRecord, RescueOperation } from "./types";
 import type { Incident } from "./state";
 
-const STORAGE_KEY = "trace_operational_records_v1";
+const STORAGE_KEY = "kavach_operational_records_v1";
 
 export interface PersistedOperationalBundle {
   version: 1 | 2;
@@ -30,7 +30,7 @@ export function isLocalStorageAvailable(): boolean {
     return false;
   }
   try {
-    const testKey = "__trace_storage_test__";
+    const testKey = "__kavach_storage_test__";
     window.localStorage.setItem(testKey, "1");
     window.localStorage.removeItem(testKey);
     return true;

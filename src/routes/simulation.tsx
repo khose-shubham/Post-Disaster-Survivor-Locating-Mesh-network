@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/simulation")({
   head: () => ({
     meta: [
-      { title: "TRACE — Simulation Lab" },
+      { title: "KAVACH — Simulation Lab" },
       {
         name: "description",
         content:
-          "TRACE Simulation Lab: disaster-response research operations with clear simulation and hardware provenance.",
+          "KAVACH Simulation Lab: disaster-response research operations with clear simulation and hardware provenance.",
       },
-      { property: "og:title", content: "TRACE — Simulation Lab" },
+      { property: "og:title", content: "KAVACH — Simulation Lab" },
       {
         property: "og:description",
         content: "Simulation Lab for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -18,5 +18,5 @@ export const Route = createFileRoute("/simulation")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="simulation" />,
+  component: () => <KavachView view="simulation" />,
 });

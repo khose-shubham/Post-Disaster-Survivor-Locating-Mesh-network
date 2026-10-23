@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/settings")({
   head: () => ({
     meta: [
-      { title: "TRACE — Platform Settings" },
+      { title: "KAVACH — Platform Settings" },
       {
         name: "description",
         content:
-          "TRACE Platform Settings: disaster-response research operations with clear simulation and hardware provenance.",
+          "KAVACH Platform Settings: disaster-response research operations with clear simulation and hardware provenance.",
       },
-      { property: "og:title", content: "TRACE — Platform Settings" },
+      { property: "og:title", content: "KAVACH — Platform Settings" },
       {
         property: "og:description",
         content: "Platform Settings for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -18,5 +18,5 @@ export const Route = createFileRoute("/settings")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="settings" />,
+  component: () => <KavachView view="settings" />,
 });

@@ -165,11 +165,11 @@ export class AuthService {
       token = authHeader.substring(7).trim();
     }
 
-    // Fallback: Check Cookie: trace_session=<token>
+    // Fallback: Check Cookie: kavach_session=<token>
     if (!token) {
       const cookieHeader = request.headers.get("cookie");
       if (cookieHeader) {
-        const match = cookieHeader.match(/trace_session=([a-zA-Z0-9_-]+)/);
+        const match = cookieHeader.match(/kavach_session=([a-zA-Z0-9_-]+)/);
         if (match && match[1]) {
           token = match[1];
         }

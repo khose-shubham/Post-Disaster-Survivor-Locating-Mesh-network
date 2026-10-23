@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/nodes")({
   head: () => ({
     meta: [
-      { title: "TRACE — Sensor Nodes" },
+      { title: "KAVACH — Sensor Nodes" },
       {
         name: "description",
         content:
-          "TRACE Sensor Nodes: disaster-response research operations with clear simulation and hardware provenance.",
+          "KAVACH Sensor Nodes: disaster-response research operations with clear simulation and hardware provenance.",
       },
-      { property: "og:title", content: "TRACE — Sensor Nodes" },
+      { property: "og:title", content: "KAVACH — Sensor Nodes" },
       {
         property: "og:description",
         content: "Sensor Nodes for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -18,5 +18,5 @@ export const Route = createFileRoute("/nodes")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="nodes" />,
+  component: () => <KavachView view="nodes" />,
 });

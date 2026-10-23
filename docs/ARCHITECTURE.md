@@ -1,8 +1,8 @@
-# TRACE System Architecture & Pipeline Specification
+# KAVACH System Architecture & Pipeline Specification
 
 ## 1. End-to-End System Pipeline
 
-The TRACE platform implements an asynchronous, decoupled pipeline designed for rapid RF signal acquisition, empirical path-loss calibration, multi-station multilateration, and operational 2D/3D visualization:
+The KAVACH platform implements an asynchronous, decoupled pipeline designed for rapid RF signal acquisition, empirical path-loss calibration, multi-station multilateration, and operational 2D/3D visualization:
 
 ```text
        ESP32 SENSOR NODES (Promiscuous BLE / Wi-Fi / Acoustic)
@@ -16,7 +16,7 @@ The TRACE platform implements an asynchronous, decoupled pipeline designed for r
                                │
                                ▼
              GATEWAY / USB SERIAL / NETWORK BRIDGE
-           (scripts/trace_gateway_daemon.py @ 115200)
+           (scripts/kavach_gateway_daemon.py @ 115200)
                                │
                                ▼
                    BACKEND PACKET VALIDATION
@@ -57,12 +57,12 @@ The TRACE platform implements an asynchronous, decoupled pipeline designed for r
 
 ### A. Microcontroller IoT Firmware Tier (`/firmware`)
 - Written in C++ for Arduino IDE and PlatformIO.
-- **`trace_gateway.ino`**: Manages Semtech SX1262 LoRa SPI transceiver, receives raw frames, performs preamble and CRC checks, and serializes packets to USB UART.
-- **`trace_sniffer.ino`**: Implements FreeRTOS tasks for promiscuous 2.4 GHz scanning and sub-GHz LoRa transmission.
-- **`trace_beacon.ino`**: Generates calibrated +3 dBm reference transmissions for empirical RF baseline profiling.
+- **`kavach_gateway.ino`**: Manages Semtech SX1262 LoRa SPI transceiver, receives raw frames, performs preamble and CRC checks, and serializes packets to USB UART.
+- **`kavach_sniffer.ino`**: Implements FreeRTOS tasks for promiscuous 2.4 GHz scanning and sub-GHz LoRa transmission.
+- **`kavach_beacon.ino`**: Generates calibrated +3 dBm reference transmissions for empirical RF baseline profiling.
 
 ### B. Ingestion & Transport Bridge (`/scripts`)
-- **`trace_gateway_daemon.py`**: Python daemon with `pyserial` and `requests`. Features automatic COM port enumeration (`--list-ports`), non-blocking buffer management, frame framing, and automatic reconnect with exponential backoff.
+- **`kavach_gateway_daemon.py`**: Python daemon with `pyserial` and `requests`. Features automatic COM port enumeration (`--list-ports`), non-blocking buffer management, frame framing, and automatic reconnect with exponential backoff.
 - Directly ingests frames to `/api/telemetry/ingest` and `/api/v1/telemetry/packet`.
 
 ### C. Backend & Persistence Layer (`/src/server`)

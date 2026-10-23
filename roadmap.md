@@ -1,4 +1,4 @@
-# Focused TRACE scene upgrade
+# Focused KAVACH scene upgrade
 
 - [ ] Preserve the shell and routes; integrate a shared interactive 2D/3D tactical view.
 - [ ] Add scene inspectors, scenario environments and a demo walkthrough.

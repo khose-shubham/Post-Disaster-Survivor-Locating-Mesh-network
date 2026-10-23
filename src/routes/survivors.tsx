@@ -1,16 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 
 export const Route = createFileRoute("/survivors")({
   head: () => ({
     meta: [
-      { title: "TRACE — Survivor Intelligence" },
+      { title: "KAVACH — Survivor Intelligence" },
       {
         name: "description",
         content:
-          "TRACE Survivor Intelligence: evidence-based classification of possible, confirmed, and rescued casualties with multi-device awareness.",
+          "KAVACH Survivor Intelligence: evidence-based classification of possible, confirmed, and rescued casualties with multi-device awareness.",
       },
-      { property: "og:title", content: "TRACE — Survivor Intelligence" },
+      { property: "og:title", content: "KAVACH — Survivor Intelligence" },
       {
         property: "og:description",
         content: "Survivor Intelligence for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -19,5 +19,5 @@ export const Route = createFileRoute("/survivors")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="survivors" />,
+  component: () => <KavachView view="survivors" />,
 });

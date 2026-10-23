@@ -51,7 +51,7 @@ export default {
     try {
       const url = new URL(request.url);
 
-      // Dedicated genuine REST API ingress boundary for TRACE Production
+      // Dedicated genuine REST API ingress boundary for KAVACH Production
       if (url.pathname.startsWith("/api")) {
         return await handleApiRouter(request, url);
       }

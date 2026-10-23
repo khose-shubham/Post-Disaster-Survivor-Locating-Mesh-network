@@ -1,6 +1,6 @@
-# TRACE REST API & Real-Time SSE Specification
+# KAVACH REST API & Real-Time SSE Specification
 
-All TRACE endpoints use JSON request and response payloads with standard HTTP status codes.
+All KAVACH endpoints use JSON request and response payloads with standard HTTP status codes.
 
 ---
 
@@ -22,7 +22,7 @@ Returns server operational health status, database connection, uptime, and mode.
 Readiness probe for orchestration checks. Returns `200 OK` when the database is initialized.
 
 ### `GET /api/docs/openapi.json`
-Returns the complete OpenAPI 3.1 schema specification for the TRACE API surface.
+Returns the complete OpenAPI 3.1 schema specification for the KAVACH API surface.
 
 ---
 
@@ -34,7 +34,7 @@ Authenticates an operator and issues a session cookie.
   ```json
   {
     "username": "admin",
-    "password": "trace_password_2026"
+    "password": "kavach_password_2026"
   }
   ```
 - **Response (`200 OK`):**
@@ -61,8 +61,8 @@ Terminates the active session and clears authentication cookies.
 ## 3. IoT Telemetry Ingestion (Hardware & Daemon Bridge)
 
 ### `POST /api/telemetry/ingest`
-Primary ingestion endpoint for physical USB serial gateways (`trace_gateway_daemon.py`) or network sniffers.
-- **Headers:** `Content-Type: application/json`, `X-API-Key: trace_dev_gateway_secret_2026` (optional)
+Primary ingestion endpoint for physical USB serial gateways (`kavach_gateway_daemon.py`) or network sniffers.
+- **Headers:** `Content-Type: application/json`, `X-API-Key: kavach_dev_gateway_secret_2026` (optional)
 - **Request Body (Versioned Telemetry Envelope):**
   ```json
   {
@@ -94,7 +94,7 @@ Primary ingestion endpoint for physical USB serial gateways (`trace_gateway_daem
 ## 4. RF Calibration API
 
 ### `GET /api/calibration/profiles`
-Returns all persisted RF path-loss profiles from `data/trace.db`.
+Returns all persisted RF path-loss profiles from `data/kavach.db`.
 
 ### `POST /api/calibration/profiles`
 Saves and activates a fitted log-distance model profile.

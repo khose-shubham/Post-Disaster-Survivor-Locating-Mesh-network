@@ -1,6 +1,6 @@
-# TRACE Microcontroller Firmware Suite
+# KAVACH Microcontroller Firmware Suite
 
-This directory contains production-ready, open-source firmware sketches for the physical IoT hardware used in the TRACE disaster-response system.
+This directory contains production-ready, open-source firmware sketches for the physical IoT hardware used in the KAVACH disaster-response system.
 
 ---
 
@@ -8,12 +8,12 @@ This directory contains production-ready, open-source firmware sketches for the 
 
 ```text
 firmware/
-├── trace_gateway/
-│   └── trace_gateway.ino       # ESP32 LoRa Gateway Concentrator & USB Serial Bridge
-├── trace_sniffer/
-│   └── trace_sniffer.ino       # ESP32 BLE/WiFi Promiscuous Sniffer Anchor Station
-├── trace_beacon/
-│   └── trace_beacon.ino        # Reference RF Calibration & Test Casualty Beacon
+├── kavach_gateway/
+│   └── kavach_gateway.ino       # ESP32 LoRa Gateway Concentrator & USB Serial Bridge
+├── kavach_sniffer/
+│   └── kavach_sniffer.ino       # ESP32 BLE/WiFi Promiscuous Sniffer Anchor Station
+├── kavach_beacon/
+│   └── kavach_beacon.ino        # Reference RF Calibration & Test Casualty Beacon
 ├── platformio.ini              # Unified PlatformIO compilation & flashing config
 └── README.md                   # Complete wiring, pinout & flashing guide
 ```
@@ -67,7 +67,7 @@ GND             ---> GND
    - `RadioLib` (by Jan Gromes, version >= 6.6.0)
    - `ArduinoJson` (by Benoit Blanchon, version >= 7.1.0)
    - `NimBLE-Arduino` (by h2zero, version >= 1.4.2)
-4. Open `firmware/trace_gateway/trace_gateway.ino`.
+4. Open `firmware/kavach_gateway/kavach_gateway.ino`.
 5. Connect your ESP32 Gateway to your computer via USB.
 6. Select your board (e.g. `ESP32 Dev Module`) and the corresponding COM port (e.g. `COM3` on Windows or `/dev/ttyUSB0` on Linux/macOS).
 7. Click **Upload** (`Ctrl+U`).
@@ -91,9 +91,9 @@ pio run -e beacon -t upload
 
 Once the Gateway is flashed:
 1. Leave the Gateway plugged into your USB port.
-2. Start the TRACE Gateway Companion Daemon from the project root:
+2. Start the KAVACH Gateway Companion Daemon from the project root:
    ```bash
-   python scripts/trace_gateway_daemon.py --port COM3 --baud 115200 --api-key trace_dev_gateway_secret_2026
+   python scripts/kavach_gateway_daemon.py --port COM3 --baud 115200 --api-key kavach_dev_gateway_secret_2026
    ```
 3. The daemon automatically forwards received LoRa frames to `http://localhost:8080/api/telemetry/ingest`.
-4. Open the TRACE web interface at `http://localhost:8080/devices` to verify live gateway connection status and incoming telemetry stream!
+4. Open the KAVACH web interface at `http://localhost:8080/devices` to verify live gateway connection status and incoming telemetry stream!

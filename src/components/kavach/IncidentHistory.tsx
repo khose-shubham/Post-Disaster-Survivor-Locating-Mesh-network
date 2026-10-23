@@ -84,10 +84,10 @@ export function IncidentHistory() {
       {/* Header */}
       <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border/60 pb-4">
         <div>
-          <p className="trace-label text-[9px] font-semibold tracking-wider text-primary mb-1">
-            TRACE / MISSION AUDIT & RETROSPECTIVE
+          <p className="kavach-label text-[9px] font-semibold tracking-wider text-primary mb-1">
+            KAVACH / MISSION AUDIT & RETROSPECTIVE
           </p>
-          <h1 className="trace-heading text-foreground">Incident History</h1>
+          <h1 className="kavach-heading text-foreground">Incident History</h1>
           <p className="text-xs text-muted-foreground mt-1 max-w-2xl">
             Historical incident records, past multilateration runs, operational event timelines, and
             mission export.
@@ -215,11 +215,11 @@ export function IncidentHistory() {
             {/* Incident Metadata Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
               <div className="panel p-2.5 bg-background/50">
-                <p className="trace-label text-[9px]">INCIDENT ID</p>
+                <p className="kavach-label text-[9px]">INCIDENT ID</p>
                 <p className="font-mono font-bold text-foreground mt-0.5">{selectedIncident?.id}</p>
               </div>
               <div className="panel p-2.5 bg-background/50">
-                <p className="trace-label text-[9px]">COORDINATES</p>
+                <p className="kavach-label text-[9px]">COORDINATES</p>
                 <p className="font-mono font-bold text-foreground mt-0.5">
                   {selectedIncident?.lat != null &&
                   selectedIncident?.lon != null &&
@@ -230,7 +230,7 @@ export function IncidentHistory() {
                 </p>
               </div>
               <div className="panel p-2.5 bg-background/50">
-                <p className="trace-label text-[9px]">SECTOR PRIORITY</p>
+                <p className="kavach-label text-[9px]">SECTOR PRIORITY</p>
                 <p className="font-mono font-bold text-warning mt-0.5">CRITICAL TACTICAL</p>
               </div>
             </div>
@@ -282,7 +282,7 @@ export function IncidentHistory() {
               Multilateration & Search Zone Runs
             </h2>
             <Badge variant="outline" className="text-[10px] font-mono">
-              Algorithm: TRACE-EST-V6.1-GDOP
+              Algorithm: KAVACH-EST-V6.1-GDOP
             </Badge>
           </div>
 
@@ -363,7 +363,7 @@ export function IncidentHistory() {
             </div>
           </div>
 
-          <div className="overflow-x-auto max-h-[500px] overflow-y-auto trace-scroll">
+          <div className="overflow-x-auto max-h-[500px] overflow-y-auto kavach-scroll">
             <Table>
               <TableHeader>
                 <TableRow className="text-[10px] uppercase font-mono">
@@ -479,7 +479,7 @@ export function IncidentHistory() {
                       ...k.zones.map((z) => ["Search Zone", z.id, `Zone ${z.id}`, (z.confidence ?? 0) >= 50 ? "High Priority" : "Moderate", `Radius: ±${z.radius}m, Residual: ${z.residual?.toFixed(1) ?? "0.0"}m, Nodes: ${z.contributingNodes.join(", ")}`, new Date(z.ts).toISOString()]),
                       ...k.operations.map((o) => ["Rescue Operation", o.id, o.title, o.status, `Sector: ${o.sector}, Confirmed: ${o.confirmedPeople}, Rescued: ${o.rescuedCount}, Awaiting: ${o.awaitingRescue}`, new Date(o.reportedAt).toISOString()]),
                     ];
-                    exportCsv(`trace_report_${inc.id}_${Date.now()}`, headers, rows);
+                    exportCsv(`kavach_report_${inc.id}_${Date.now()}`, headers, rows);
                   }}
                 >
                   <Download size={13} />
@@ -491,22 +491,22 @@ export function IncidentHistory() {
             {/* KPI Summary Cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-1">
               <div className="panel p-3 bg-background/50">
-                <span className="trace-label text-[9px]">INCIDENT STATUS</span>
+                <span className="kavach-label text-[9px]">INCIDENT STATUS</span>
                 <p className="font-bold text-foreground text-sm uppercase mt-0.5">{selectedIncident?.status ?? "ACTIVE"}</p>
                 <p className="text-[10px] text-muted-foreground">{selectedIncident?.disaster ?? "Operational Incident"}</p>
               </div>
               <div className="panel p-3 bg-background/50">
-                <span className="trace-label text-[9px]">ACTIVE NODES</span>
+                <span className="kavach-label text-[9px]">ACTIVE NODES</span>
                 <p className="font-bold text-primary text-sm font-mono mt-0.5">{k.nodes.filter(n => n.status !== "offline").length} / {k.nodes.length} Online</p>
                 <p className="text-[10px] text-muted-foreground">{k.gatewayConnected ? "Gateway Online" : "Gateway Offline"}</p>
               </div>
               <div className="panel p-3 bg-background/50">
-                <span className="trace-label text-[9px]">SEARCH ZONES DERIVED</span>
+                <span className="kavach-label text-[9px]">SEARCH ZONES DERIVED</span>
                 <p className="font-bold text-warning text-sm font-mono mt-0.5">{k.zones.length} Zones</p>
                 <p className="text-[10px] text-muted-foreground">{k.zones.length > 0 ? `Avg Radius: ±${Math.round(k.zones.reduce((a, z) => a + z.radius, 0) / k.zones.length)}m` : "None calculated"}</p>
               </div>
               <div className="panel p-3 bg-background/50">
-                <span className="trace-label text-[9px]">RESCUE MISSIONS</span>
+                <span className="kavach-label text-[9px]">RESCUE MISSIONS</span>
                 <p className="font-bold text-emerald-400 text-sm font-mono mt-0.5">{k.operations.length} Missions</p>
                 <p className="text-[10px] text-muted-foreground">{k.operations.filter(o => o.status === "Rescue In Progress" || o.status === "Under Investigation").length} In Progress</p>
               </div>

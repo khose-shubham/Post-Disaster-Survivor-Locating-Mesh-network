@@ -29,7 +29,7 @@ test("Complete REST API Endpoints & Authorization Tests", async (t) => {
     assert.strictEqual(res.status, 200);
     const body = (await res.json()) as { openapi: string; info: { title: string } };
     assert.strictEqual(body.openapi, "3.1.0");
-    assert.ok(body.info.title.includes("TRACE"));
+    assert.ok(body.info.title.includes("KAVACH"));
   });
 
   await t.test("GET /api/health and GET /api/ready return health and readiness", async () => {

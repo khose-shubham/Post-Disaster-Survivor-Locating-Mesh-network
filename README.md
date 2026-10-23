@@ -1,12 +1,12 @@
-# TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
+# KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
 
-TRACE is a disaster-response research and tactical operations platform designed for rapid localization of trapped survivors in collapsed structures using crowd-signal RF sniffer triangulation, multi-station log-distance path-loss calibration, and real-time operational situational awareness.
+KAVACH is a disaster-response research and tactical operations platform designed for rapid localization of trapped survivors in collapsed structures using crowd-signal RF sniffer triangulation, multi-station log-distance path-loss calibration, and real-time operational situational awareness.
 
 ---
 
 ## 1. Primary Operational Workspaces (6 Sections)
 
-TRACE provides a clean, focused operational hierarchy for emergency responders:
+KAVACH provides a clean, focused operational hierarchy for emergency responders:
 
 1. **COMMAND CENTER (`/`)**: Tactical operational dashboard displaying incident state, hardware connectivity, online sensor nodes, recent observations, and defensible operational next actions.
 2. **LIVE MAP (`/map`)**: Interactive 2D tactical map and 3D building/rubble view with metric projection, true geometric uncertainty circles, antenna coverage, coordinate inspection, and spatial layer toggles.
@@ -51,18 +51,18 @@ PHYSICAL TRANSMITTER (Mobile BLE / Wi-Fi Device)
         [ESP32 GATEWAY CONCENTRATOR (GW01)]
                     │
                     ▼  USB UART Serial Bridge (115200 baud)
-  [HOST MACHINE: scripts/trace_gateway_daemon.py]
+  [HOST MACHINE: scripts/kavach_gateway_daemon.py]
                     │
                     ▼  HTTP POST (JSON Telemetry Protocol v2.4)
-     [TRACE BACKEND: /api/telemetry/ingest]
+     [KAVACH BACKEND: /api/telemetry/ingest]
                     │
-                    ▼  SQLite Database (`data/trace.db`) & Multilateration Engine
-    [TRACE WEB CONSOLE & TACTICAL MAP DISPLAY]
+                    ▼  SQLite Database (`data/kavach.db`) & Multilateration Engine
+    [KAVACH WEB CONSOLE & TACTICAL MAP DISPLAY]
 ```
 
 ---
 
-## 4. Quickstart: Running TRACE Locally
+## 4. Quickstart: Running KAVACH Locally
 
 ### Prerequisites
 
@@ -82,9 +82,9 @@ Default parameters in `.env`:
 ```ini
 PORT=8080
 NODE_ENV=development
-DATABASE_PATH=data/trace.db
-SESSION_SECRET=trace_dev_secret_key_change_in_production_min_32_chars
-GATEWAY_SECRET=trace_dev_gateway_secret_2026
+DATABASE_PATH=data/kavach.db
+SESSION_SECRET=kavach_dev_secret_key_change_in_production_min_32_chars
+GATEWAY_SECRET=kavach_dev_gateway_secret_2026
 CORS_ORIGIN=*
 ```
 
@@ -115,7 +115,7 @@ npm run preview
 
 ### A. Strict Data Mode Separation
 
-TRACE provides strict physical isolation between data sources:
+KAVACH provides strict physical isolation between data sources:
 
 - **`LIVE HARDWARE` Mode**: Telemetry is ONLY accepted from verified hardware uplinks. If the gateway or sniffer is disconnected, the UI explicitly reports `DISCONNECTED / AWAITING TELEMETRY`. It **never** fabricates fake telemetry to appear functional.
 - **`SIMULATION` Mode**: Generates synthetic multi-station RF scenarios for operator training with deterministic PRNG seeds, obstacle attenuation, and noise models. All synthetic records are explicitly tagged `[SIMULATION DATA]`.
@@ -127,10 +127,10 @@ TRACE provides strict physical isolation between data sources:
 3. Start the companion daemon:
    ```bash
    # Windows (check Device Manager for COM port)
-   python scripts/trace_gateway_daemon.py --port COM3 --baud 115200 --api-key trace_dev_gateway_secret_2026
+   python scripts/kavach_gateway_daemon.py --port COM3 --baud 115200 --api-key kavach_dev_gateway_secret_2026
 
    # Linux / macOS
-   python scripts/trace_gateway_daemon.py --port /dev/ttyUSB0 --baud 115200 --api-key trace_dev_gateway_secret_2026
+   python scripts/kavach_gateway_daemon.py --port /dev/ttyUSB0 --baud 115200 --api-key kavach_dev_gateway_secret_2026
    ```
 4. Verify on **Devices & Calibration** (`/devices`) that the gateway indicator switches to `ONLINE`.
 

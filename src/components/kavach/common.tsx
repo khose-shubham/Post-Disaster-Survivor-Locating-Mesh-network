@@ -157,7 +157,7 @@ export function exportCsv(name: string, headers: string[], rows: unknown[][]) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `trace-${name}-${Date.now()}.csv`;
+    a.download = `kavach-${name}-${Date.now()}.csv`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success(`Exported ${name} data to CSV (${rows.length} records)`);

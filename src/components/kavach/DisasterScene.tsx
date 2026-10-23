@@ -806,7 +806,7 @@ export default function DisasterScene({
       camera={{ position: [30, 32, 38], fov: 46, near: 0.1, far: 180 }}
       frameloop={reduced ? "demand" : "always"}
       onPointerMissed={() => select(null)}
-      aria-label="Interactive TRACE 3D disaster scene"
+      aria-label="Interactive KAVACH 3D disaster scene"
     >
       <TacticalWorld props={props} select={select} colors={colors} reduced={reduced} />
     </Canvas>

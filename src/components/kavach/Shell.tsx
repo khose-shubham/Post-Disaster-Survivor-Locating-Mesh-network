@@ -116,7 +116,7 @@ function Clock() {
   );
 }
 
-export function TraceShell({ children }: { children: ReactNode }) {
+export function KavachShell({ children }: { children: ReactNode }) {
   const k = useKavach();
   const [open, setOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -169,13 +169,13 @@ export function TraceShell({ children }: { children: ReactNode }) {
           <div className={cn("overflow-hidden transition-opacity", collapsed && "lg:hidden")}>
             <div className="flex items-center gap-1.5">
               <span className="font-display text-lg font-bold tracking-tight text-foreground">
-                TRACE
+                KAVACH
               </span>
               <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/15 text-primary border border-primary/25 font-semibold">
                 v2.4
               </span>
             </div>
-            <p className="trace-label text-[8px] text-muted-foreground truncate">
+            <p className="kavach-label text-[8px] text-muted-foreground truncate">
               DISASTER RESCUE COMMAND
             </p>
           </div>
@@ -191,12 +191,12 @@ export function TraceShell({ children }: { children: ReactNode }) {
         </div>
 
         {/* Navigation list */}
-        <nav className="flex-1 overflow-y-auto trace-scroll px-2.5 py-3 space-y-3">
+        <nav className="flex-1 overflow-y-auto kavach-scroll px-2.5 py-3 space-y-3">
           {/* Primary 6 Navigation Items */}
           <div className="space-y-1">
             <p
               className={cn(
-                "trace-label text-[9px] font-semibold tracking-wider text-primary px-2.5 py-1 select-none flex items-center justify-between",
+                "kavach-label text-[9px] font-semibold tracking-wider text-primary px-2.5 py-1 select-none flex items-center justify-between",
                 collapsed && "lg:hidden",
               )}
             >
@@ -257,7 +257,7 @@ export function TraceShell({ children }: { children: ReactNode }) {
               <span className="font-medium text-foreground/90">TACTICAL PLATFORM</span>
             </div>
             <p className="text-muted-foreground text-[9px] leading-tight">
-              TRACE Command V8.0
+              KAVACH Command V8.0
               <br />
               Disaster Response Operations
             </p>
@@ -299,7 +299,7 @@ export function TraceShell({ children }: { children: ReactNode }) {
             </Button>
             <div className="shrink-0 flex items-center gap-2.5">
               <span className="font-bold text-xs tracking-wider text-primary font-mono px-2 py-0.5 rounded-md bg-primary/10 border border-primary/25 shadow-xs">
-                TRACE
+                KAVACH
               </span>
               <span className="text-muted-foreground/40 text-xs font-mono">/</span>
               <h1 className="text-sm font-bold text-foreground tracking-tight whitespace-nowrap">
@@ -450,7 +450,7 @@ export function TraceShell({ children }: { children: ReactNode }) {
                       {unackAlerts} pending
                     </span>
                   </div>
-                  <div className="py-2 space-y-2 max-h-64 overflow-y-auto trace-scroll">
+                  <div className="py-2 space-y-2 max-h-64 overflow-y-auto kavach-scroll">
                     {k.alerts.length > 0 ? (
                       k.alerts.slice(0, 5).map((a) => (
                         <div
@@ -535,7 +535,7 @@ export function TraceShell({ children }: { children: ReactNode }) {
                       </span>
                     </div>
                     <p className="text-[10px] text-muted-foreground mt-0.5">
-                      {k.currentUser?.email || "internal@trace-rescue.internal"}
+                      {k.currentUser?.email || "internal@kavach-rescue.internal"}
                     </p>
                   </div>
 
@@ -611,7 +611,7 @@ export function TraceShell({ children }: { children: ReactNode }) {
         {/* Tactical Footer */}
         <footer className="px-4 lg:px-6 py-3 border-t border-border/80 flex flex-wrap items-center justify-between gap-2 text-[10px] text-muted-foreground no-print bg-background/50">
           <div className="flex items-center gap-3">
-            <span className="font-semibold text-foreground/80">TRACE RESCUE COMMAND</span>
+            <span className="font-semibold text-foreground/80">KAVACH RESCUE COMMAND</span>
             <span>·</span>
             <span>Triangulated Rescue Aid via Crowd-Signal Estimation</span>
           </div>

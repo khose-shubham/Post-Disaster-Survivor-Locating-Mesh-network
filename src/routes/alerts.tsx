@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TraceView } from "@/components/kavach/TracePages";
+import { KavachView } from "@/components/kavach/KavachPages";
 export const Route = createFileRoute("/alerts")({
   head: () => ({
     meta: [
-      { title: "TRACE — Alert Queue" },
+      { title: "KAVACH — Alert Queue" },
       {
         name: "description",
         content:
-          "TRACE Alert Queue: disaster-response research operations with clear simulation and hardware provenance.",
+          "KAVACH Alert Queue: disaster-response research operations with clear simulation and hardware provenance.",
       },
-      { property: "og:title", content: "TRACE — Alert Queue" },
+      { property: "og:title", content: "KAVACH — Alert Queue" },
       {
         property: "og:description",
         content: "Alert Queue for Triangulated Rescue Aid via Crowd-Signal Estimation.",
@@ -18,5 +18,5 @@ export const Route = createFileRoute("/alerts")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <TraceView view="alerts" />,
+  component: () => <KavachView view="alerts" />,
 });

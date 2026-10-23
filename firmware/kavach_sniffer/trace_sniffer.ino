@@ -1,6 +1,6 @@
 /*
  * =====================================================================================
- * TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
+ * KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
  * PHYSICAL IoT FIELD SNIFFER ANCHOR NODE (ESP32 + LoRa + BLE + Wi-Fi)
  *
  * Microcontroller : ESP32-WROOM-32 / ESP32-S3 (30-pin or 38-pin DevKit)
@@ -37,7 +37,7 @@
 #define LORA_BW_KHZ    125.0   // 125 kHz bandwidth
 #define LORA_SF        7       // Spreading factor SF7 (optimal range + low airtime)
 #define LORA_CR        7       // Coding rate 4/7
-#define LORA_SYNCWORD  0x12    // Private TRACE syncword
+#define LORA_SYNCWORD  0x12    // Private KAVACH syncword
 #define LORA_POWER_DBM 14      // Transmit power (+14 dBm)
 
 // =====================================================================================
@@ -168,7 +168,7 @@ void setup() {
 
   Serial.println();
   Serial.println(F("===================================================="));
-  Serial.println(F(" TRACE — Tactical Rescue Sniffer Anchor Node"));
+  Serial.println(F(" KAVACH — Tactical Rescue Sniffer Anchor Node"));
   Serial.print(F(" Assigned Node ID : ")); Serial.println(F(NODE_ID));
   Serial.print(F(" Survey Location  : Lat ")); Serial.print(NODE_LAT, 6);
   Serial.print(F(", Lon ")); Serial.println(NODE_LON, 6);
@@ -244,7 +244,7 @@ void loop() {
   // Realistic RSSI fallback if no survivor device in immediate vicinity (-72 to -88 dBm)
   float reportedRssi = (dominantRssi > -115) ? (float)dominantRssi : (-74.0f - (float)(random(0, 15)));
 
-  // 5. Construct standardized TRACE Telemetry JSON packet
+  // 5. Construct standardized KAVACH Telemetry JSON packet
   StaticJsonDocument<384> doc;
   doc["deviceId"] = NODE_ID;
   doc["seq"] = packetSeq;

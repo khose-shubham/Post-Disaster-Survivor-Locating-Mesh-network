@@ -1,4 +1,4 @@
-# TRACE Hardware Integration Guide
+# KAVACH Hardware Integration Guide
 
 ## 1. Physical Architecture & Data Flow
 
@@ -12,13 +12,13 @@ PHYSICAL TRANSMITTER (Mobile BLE / Wi-Fi Device)
         [ESP32 GATEWAY CONCENTRATOR (GW01)]
                     │
                     ▼  USB UART Serial Bridge (115200 baud)
-  [HOST MACHINE: scripts/trace_gateway_daemon.py]
+  [HOST MACHINE: scripts/kavach_gateway_daemon.py]
                     │
                     ▼  HTTP POST (JSON Telemetry Protocol v2.4)
-     [TRACE BACKEND: /api/telemetry/ingest]
+     [KAVACH BACKEND: /api/telemetry/ingest]
                     │
                     ▼  SQLite Persistent Storage & Multilateration Engine
-    [TRACE WEB CONSOLE & TACTICAL MAP DISPLAY]
+    [KAVACH WEB CONSOLE & TACTICAL MAP DISPLAY]
 ```
 
 ---
@@ -28,7 +28,7 @@ PHYSICAL TRANSMITTER (Mobile BLE / Wi-Fi Device)
 | Component                                                    | Status                       | Verification Notes                                                                                              |
 | :----------------------------------------------------------- | :--------------------------- | :-------------------------------------------------------------------------------------------------------------- |
 | **Backend Ingestion API (`/api/telemetry/ingest`)**          | `IMPLEMENTED AND VERIFIED`   | Tested with 82 automated test suites. Validates schema, deduplicates packets, rejects out-of-bounds RSSI.       |
-| **Gateway Serial Bridge Daemon (`trace_gateway_daemon.py`)** | `IMPLEMENTED AND VERIFIED`   | Python daemon with auto-reconnect, JSON frame parsing, line buffering, and HTTP post-back.                      |
+| **Gateway Serial Bridge Daemon (`kavach_gateway_daemon.py`)** | `IMPLEMENTED AND VERIFIED`   | Python daemon with auto-reconnect, JSON frame parsing, line buffering, and HTTP post-back.                      |
 | **RF Calibration Profile System**                            | `IMPLEMENTED AND VERIFIED`   | OLS regression solver, SQLite database storage, dynamic engine reload.                                          |
 | **Physical ESP32 Firmware Upload**                           | `REQUIRES PHYSICAL HARDWARE` | Firmware sketches provided in `docs/ARDUINO_SETUP.md`. Awaiting physical board connection on target deployment. |
 
@@ -36,7 +36,7 @@ PHYSICAL TRANSMITTER (Mobile BLE / Wi-Fi Device)
 
 ## 3. Gateway Daemon Quickstart
 
-The Python serial bridge daemon connects the physical USB gateway to the local TRACE backend.
+The Python serial bridge daemon connects the physical USB gateway to the local KAVACH backend.
 
 ### Prerequisites
 
@@ -50,16 +50,16 @@ The Python serial bridge daemon connects the physical USB gateway to the local T
 
 ```bash
 # Auto-detect USB serial port (or scan available ports):
-python scripts/trace_gateway_daemon.py --list-ports
+python scripts/kavach_gateway_daemon.py --list-ports
 
 # Connect to physical serial gateway (Windows):
-python scripts/trace_gateway_daemon.py --port COM3 --baud 115200 --api-key trace_dev_gateway_secret_2026
+python scripts/kavach_gateway_daemon.py --port COM3 --baud 115200 --api-key kavach_dev_gateway_secret_2026
 
 # Connect to physical serial gateway (Linux / macOS):
-python scripts/trace_gateway_daemon.py --port /dev/ttyUSB0 --baud 115200 --api-key trace_dev_gateway_secret_2026
+python scripts/kavach_gateway_daemon.py --port /dev/ttyUSB0 --baud 115200 --api-key kavach_dev_gateway_secret_2026
 
 # Run automated multi-station simulation (when no physical hardware attached):
-python scripts/trace_gateway_daemon.py --simulate --rate 1.0 --api-key trace_dev_gateway_secret_2026
+python scripts/kavach_gateway_daemon.py --simulate --rate 1.0 --api-key kavach_dev_gateway_secret_2026
 ```
 
 ### Command-Line Arguments

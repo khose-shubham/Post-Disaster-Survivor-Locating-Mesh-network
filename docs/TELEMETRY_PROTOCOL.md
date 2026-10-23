@@ -1,8 +1,8 @@
-# TRACE Telemetry Protocol Specification (v2.4)
+# KAVACH Telemetry Protocol Specification (v2.4)
 
 ## 1. Overview
 
-The TRACE (Triangulated Rescue Aid via Crowd-Signal Estimation) system ingests telemetry packets emitted by sensor sniffers and edge gateways. This document formalizes the versioned JSON packet envelope, field constraints, validation boundaries, and deduplication rules enforced at the backend ingestion boundary (`POST /api/telemetry/ingest` and `POST /api/v1/telemetry/packet`).
+The KAVACH (Triangulated Rescue Aid via Crowd-Signal Estimation) system ingests telemetry packets emitted by sensor sniffers and edge gateways. This document formalizes the versioned JSON packet envelope, field constraints, validation boundaries, and deduplication rules enforced at the backend ingestion boundary (`POST /api/telemetry/ingest` and `POST /api/v1/telemetry/packet`).
 
 ---
 

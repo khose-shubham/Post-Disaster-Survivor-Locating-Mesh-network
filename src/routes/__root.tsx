@@ -10,11 +10,11 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import { KavachProvider } from "@/lib/kavach/store";
-import { TraceShell } from "@/components/kavach/Shell";
+import { KavachShell } from "@/components/kavach/Shell";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
-import { reportTraceError } from "../lib/trace-error-reporting";
+import { reportKavachError } from "../lib/kavach-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -42,7 +42,7 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportTraceError(error, { boundary: "tanstack_root_error_component" });
+    reportKavachError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
@@ -81,10 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TRACE | Rescue Command" },
+      { title: "KAVACH | Rescue Command" },
       { name: "description", content: "Triangulated Rescue Aid via Crowd-Signal Estimation" },
-      { name: "author", content: "TRACE" },
-      { property: "og:title", content: "TRACE | Rescue Command" },
+      { name: "author", content: "KAVACH" },
+      { property: "og:title", content: "KAVACH | Rescue Command" },
       {
         property: "og:description",
         content: "Triangulated Rescue Aid via Crowd-Signal Estimation",
@@ -101,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/trace-icon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/kavach-icon.svg", type: "image/svg+xml" },
       { rel: "alternate icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
@@ -130,12 +130,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <TooltipProvider><KavachProvider><TraceShell><Outlet /></TraceShell><Toaster position="top-right" /></KavachProvider></TooltipProvider> breaks all child routes. */}
+      {/* Required: nested routes render here. Removing <TooltipProvider><KavachProvider><KavachShell><Outlet /></KavachShell><Toaster position="top-right" /></KavachProvider></TooltipProvider> breaks all child routes. */}
       <TooltipProvider>
         <KavachProvider>
-          <TraceShell>
+          <KavachShell>
             <Outlet />
-          </TraceShell>
+          </KavachShell>
           <Toaster position="top-right" />
         </KavachProvider>
       </TooltipProvider>

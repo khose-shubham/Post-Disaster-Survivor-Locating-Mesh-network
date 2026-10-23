@@ -1,13 +1,13 @@
 /*
  * =====================================================================================
- * TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
+ * KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
  * PHYSICAL IoT MASTER GATEWAY CONCENTRATOR (ESP32 + LoRa + USB / Wi-Fi Uplink)
  *
  * Identity        : GW-PRIMARY-ALPHA (Master LoRa Gateway)
  * Microcontroller : ESP32-WROOM-32 / ESP32-S3 (30-pin or 38-pin DevKit)
  * Radio Modules   : SX1276 / SX1278 (Ra-02 / RFM95W) OR SX1262 (Ebyte E22)
  * Function        : Collects multi-anchor field packets over LoRa and bridges them
- *                   to the TRACE Command Platform via USB Serial (115200 baud)
+ *                   to the KAVACH Command Platform via USB Serial (115200 baud)
  *                   OR optionally via direct Wi-Fi HTTP POST!
  * =====================================================================================
  */
@@ -89,7 +89,7 @@ void forwardHttpTelemetry(const String& jsonPayload) {
   HTTPClient http;
   http.begin(SERVER_URL);
   http.addHeader("Content-Type", "application/json");
-  http.addHeader("X-Trace-Gateway-Secret", "trace_dev_gateway_secret_2026");
+  http.addHeader("X-Kavach-Gateway-Secret", "kavach_dev_gateway_secret_2026");
   int code = http.POST(jsonPayload);
   http.end();
 }
@@ -104,7 +104,7 @@ void setup() {
 
   Serial.println();
   Serial.println(F("===================================================="));
-  Serial.println(F(" TRACE Master LoRa Gateway Concentrator Bridge"));
+  Serial.println(F(" KAVACH Master LoRa Gateway Concentrator Bridge"));
   Serial.print(F(" Gateway ID : ")); Serial.println(F(GATEWAY_ID));
   Serial.print(F(" Frequency  : ")); Serial.print(LORA_FREQ_MHZ); Serial.println(F(" MHz"));
   Serial.println(F("===================================================="));

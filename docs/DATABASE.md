@@ -1,8 +1,8 @@
-# TRACE Database & Persistence Architecture
+# KAVACH Database & Persistence Architecture
 
 ## 1. Storage Engine Overview
 
-The TRACE persistent storage engine is powered by **SQLite** using Node.js `better-sqlite3` in Write-Ahead Logging (`WAL`) mode, storing the database at `data/trace.db`.
+The KAVACH persistent storage engine is powered by **SQLite** using Node.js `better-sqlite3` in Write-Ahead Logging (`WAL`) mode, storing the database at `data/kavach.db`.
 
 ### Key Engine Features:
 - **Write-Ahead Logging (`PRAGMA journal_mode = WAL`)**: Concurrent read access during active telemetry writes without locking contention.

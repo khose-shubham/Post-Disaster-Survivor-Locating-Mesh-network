@@ -1,5 +1,5 @@
 /*
- * TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
+ * KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
  * Firmware: Reference RF Calibration & Test Casualty Beacon
  *
  * Microcontroller: ESP32-WROOM-32D / ESP32-C3 / ESP32-S3
@@ -10,7 +10,7 @@
 
 #include <NimBLEDevice.h>
 
-#define BEACON_NAME     "TRACE-BEACON-01"
+#define BEACON_NAME     "KAVACH-BEACON-01"
 #define ADVERT_INTERVAL 100 // 100ms advertising interval for rapid calibration sampling
 #define TX_POWER_LEVEL  ESP_PWR_LVL_P3 // +3 dBm output power
 
@@ -19,7 +19,7 @@ NimBLEAdvertising* pAdvertising = nullptr;
 void setup() {
   Serial.begin(115200);
   delay(1000);
-  Serial.println(F("TRACE Calibration & Test Beacon Initializing..."));
+  Serial.println(F("KAVACH Calibration & Test Beacon Initializing..."));
 
   // Set fixed RF output power for repeatable empirical calibration
   esp_ble_tx_power_set(ESP_BLE_PWR_TYPE_ADV, TX_POWER_LEVEL);
@@ -38,7 +38,7 @@ void setup() {
   pAdvertising->setMaxInterval(ADVERT_INTERVAL + 20);
 
   pAdvertising->start();
-  Serial.println(F("TRACE Beacon Broadcasting at +3 dBm (Active)."));
+  Serial.println(F("KAVACH Beacon Broadcasting at +3 dBm (Active)."));
 }
 
 void loop() {

@@ -14,7 +14,7 @@ test("V7 API 1: GET /api/v1/health returns genuine engine version, uptime, and e
   const data = (await res.json()) as Record<string, unknown>;
   assert.equal(data.status, "healthy");
   assert.equal(data.version, "7.0.0");
-  assert.equal(data.estimatorVersion, "TRACE-EST-V6.1-GDOP");
+  assert.equal(data.estimatorVersion, "KAVACH-EST-V6.1-GDOP");
   assert.ok(Array.isArray(data.supportedEndpoints), "Must list supported endpoints");
   assert.ok((data.supportedEndpoints as string[]).includes("POST /api/v1/telemetry/packet"));
 });

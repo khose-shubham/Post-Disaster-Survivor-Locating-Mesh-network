@@ -17,7 +17,7 @@ export interface RealtimeEvent {
   data: unknown;
 }
 
-class TraceEventBus extends EventEmitter {
+class KavachEventBus extends EventEmitter {
   publish(
     event: Omit<RealtimeEvent, "id" | "timestamp"> & {
       id?: string | undefined;
@@ -32,7 +32,7 @@ class TraceEventBus extends EventEmitter {
       data: event.data,
     };
 
-    this.emit("trace_event", fullEvent);
+    this.emit("kavach_event", fullEvent);
     if (fullEvent.incidentId) {
       this.emit(`incident:${fullEvent.incidentId}`, fullEvent);
     }
@@ -40,6 +40,6 @@ class TraceEventBus extends EventEmitter {
   }
 }
 
-export const eventBus = new TraceEventBus();
+export const eventBus = new KavachEventBus();
 // Increase listener limit to support multiple connected clients
 eventBus.setMaxListeners(200);

@@ -3,9 +3,9 @@ export function renderErrorPage(): string {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>TRACE — System Recovery</title>
+    <title>KAVACH — System Recovery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/trace-icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/kavach-icon.svg" type="image/svg+xml" />
     <style>
       body {
         font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
@@ -88,7 +88,7 @@ export function renderErrorPage(): string {
   <body>
     <div class="card">
       <span class="badge">TACTICAL SYSTEM RECOVERY</span>
-      <h1>TRACE Command Gateway Interrupted</h1>
+      <h1>KAVACH Command Gateway Interrupted</h1>
       <p>An unexpected SSR runtime fault occurred during session processing. The command shell state remains protected in local memory.</p>
       <div class="actions">
         <button class="primary" onclick="location.reload()">Reload Session</button>

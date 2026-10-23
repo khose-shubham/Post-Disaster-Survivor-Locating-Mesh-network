@@ -1,13 +1,13 @@
-# TRACE Live Demonstration Checklist & Workflow
+# KAVACH Live Demonstration Checklist & Workflow
 
-This checklist guides field operators, evaluators, and project review teams through a complete operational demonstration of the TRACE system.
+This checklist guides field operators, evaluators, and project review teams through a complete operational demonstration of the KAVACH system.
 
 ---
 
 ## Pre-Flight Setup
 
 - [ ] Dependencies installed (`npm install`).
-- [ ] SQLite database seeded (`data/trace.db`).
+- [ ] SQLite database seeded (`data/kavach.db`).
 - [ ] Application running (`npm run dev` or `npm run build && npm run preview`).
 - [ ] Browser open to `http://localhost:3000`.
 
@@ -16,7 +16,7 @@ This checklist guides field operators, evaluators, and project review teams thro
 ## Step 1: Tactical Command Center Overview (`/`)
 
 - [ ] **Top Bar Inspection**:
-  - Verify TRACE identity and active incident dropdown.
+  - Verify KAVACH identity and active incident dropdown.
   - Check the `SIMULATION / LIVE HARDWARE` mode toggle.
   - Verify Gateway Online/Offline badge and API/DB health indicator.
   - Verify local real-time clock.
@@ -51,7 +51,7 @@ This checklist guides field operators, evaluators, and project review teams thro
 
 - [ ] **Gateway & Network Overview**:
   - Verify LoRa Gateway status card (Active Frequency, Ingress Endpoint, Last Heartbeat).
-  - Inspect Companion Daemon setup command (`python scripts/trace_gateway_daemon.py`).
+  - Inspect Companion Daemon setup command (`python scripts/kavach_gateway_daemon.py`).
 - [ ] **Sensor Node Inventory**:
   - Review table of sniffer stations with Battery, LoRa RSSI, SNR, and GPS status.
   - Click on a node to view the diagnostics modal.

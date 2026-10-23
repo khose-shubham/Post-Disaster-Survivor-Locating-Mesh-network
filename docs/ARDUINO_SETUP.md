@@ -1,4 +1,4 @@
-# TRACE Arduino & ESP32 Firmware Setup Guide
+# KAVACH Arduino & ESP32 Firmware Setup Guide
 
 ## 1. Target Hardware & Specifications
 
@@ -28,7 +28,7 @@ lib_deps =
 
 ---
 
-## 3. Gateway Concentrator Sketch (`trace_gateway.ino`)
+## 3. Gateway Concentrator Sketch (`kavach_gateway.ino`)
 
 The gateway listens continuously for incoming LoRa packets from distributed sniffer anchors and forwards them over USB serial as JSON lines to the companion daemon:
 
@@ -74,7 +74,7 @@ void loop() {
 
 ---
 
-## 4. Sniffer Station Sketch (`trace_sniffer.ino`)
+## 4. Sniffer Station Sketch (`kavach_sniffer.ino`)
 
 The sniffer station listens for BLE advertising packets emitted by mobile devices, packages the observed RSSI, and transmits a LoRa packet to the gateway:
 
@@ -140,4 +140,4 @@ void loop() {
 
 ## 5. Physical Verification Notice
 
-> **IMPORTANT**: Uploading firmware and testing over radio frequencies requires the physical ESP32 and SX1262 hardware connected to your machine via USB. In software-only environments, use the built-in **Simulation Mode** or feed synthetic test packets using the companion script `scripts/trace_gateway_daemon.py`.
+> **IMPORTANT**: Uploading firmware and testing over radio frequencies requires the physical ESP32 and SX1262 hardware connected to your machine via USB. In software-only environments, use the built-in **Simulation Mode** or feed synthetic test packets using the companion script `scripts/kavach_gateway_daemon.py`.

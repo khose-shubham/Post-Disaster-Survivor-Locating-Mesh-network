@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 """
-TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
-Hardware Gateway Bridge Companion Daemon (TRACE V8.0 Consolidated)
+KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
+Hardware Gateway Bridge Companion Daemon (KAVACH V8.0 Consolidated)
 
 Reads raw telemetry from physical USB/UART LoRa gateways (ESP32 / SX1262 / SX1276)
 or simulates field sniffer constellations, formats packets into the strict
-TRACE Ingress JSON specification, and streams them over HTTP to the TRACE API.
+KAVACH Ingress JSON specification, and streams them over HTTP to the KAVACH API.
 
 Zero external dependencies required (uses standard library urllib).
 Optional: `pip install pyserial` for physical serial port reading.
 
 Usage:
   # Scan available COM ports:
-  python trace_gateway_daemon.py --list-ports
+  python kavach_gateway_daemon.py --list-ports
 
   # Auto-detect or connect to physical serial gateway:
-  python trace_gateway_daemon.py --port COM3 --baud 115200 --api-key trace_dev_gateway_secret_2026
+  python kavach_gateway_daemon.py --port COM3 --baud 115200 --api-key kavach_dev_gateway_secret_2026
 
   # Synthetic hardware simulation stream (when no physical hardware attached):
-  python trace_gateway_daemon.py --simulate --rate 1.0 --api-key trace_dev_gateway_secret_2026
+  python kavach_gateway_daemon.py --simulate --rate 1.0 --api-key kavach_dev_gateway_secret_2026
 """
 
 import argparse
@@ -85,7 +85,7 @@ def auto_detect_serial_port() -> Optional[str]:
     return None
 
 
-class TraceGatewayDaemon:
+class KavachGatewayDaemon:
     def __init__(
         self,
         endpoint: str = DEFAULT_ENDPOINT,
@@ -236,16 +236,16 @@ class TraceGatewayDaemon:
         return None
 
     def post_telemetry(self, packet: Dict[str, Any]) -> bool:
-        """Post telemetry JSON to the TRACE Ingress API."""
+        """Post telemetry JSON to the KAVACH Ingress API."""
         payload_bytes = json.dumps(packet).encode("utf-8")
         headers = {
             "Content-Type": "application/json; charset=utf-8",
-            "User-Agent": "TRACE-Gateway-Daemon/8.0",
-            "X-Trace-Gateway-Id": self.gateway_id,
+            "User-Agent": "KAVACH-Gateway-Daemon/8.0",
+            "X-Kavach-Gateway-Id": self.gateway_id,
         }
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
-            headers["X-Trace-Gateway-Secret"] = self.api_key
+            headers["X-Kavach-Gateway-Secret"] = self.api_key
 
         req = urllib.request.Request(
             self.endpoint,
@@ -277,12 +277,12 @@ class TraceGatewayDaemon:
             return False
         except Exception as e:
             elapsed_ms = round((time.time() - start) * 1000, 1)
-            self.log("WARN", f"Failed to reach TRACE endpoint ({self.endpoint}): {e} [{elapsed_ms}ms]")
+            self.log("WARN", f"Failed to reach KAVACH endpoint ({self.endpoint}): {e} [{elapsed_ms}ms]")
             self.rejected_count += 1
             return False
 
     def run(self):
-        self.log("INIT", "=== TRACE V8.0 Hardware Gateway Companion Daemon ===")
+        self.log("INIT", "=== KAVACH V8.0 Hardware Gateway Companion Daemon ===")
         self.log("INIT", f"Target Ingress API: {self.endpoint}")
         self.log("INIT", f"Gateway Identifier: {self.gateway_id}")
 
@@ -352,13 +352,13 @@ class TraceGatewayDaemon:
         self.log("INFO", "\n=== Daemon Shutdown Summary ===")
         self.log("INFO", f"Uptime: {duration}s")
         self.log("INFO", f"Packets Transmitted: {self.sent_count}")
-        self.log("INFO", f"Accepted by TRACE API: {self.accepted_count}")
+        self.log("INFO", f"Accepted by KAVACH API: {self.accepted_count}")
         self.log("INFO", f"Rejected or Dropped: {self.rejected_count}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="TRACE V8.0 Hardware Gateway Companion Daemon")
-    parser.add_argument("--endpoint", default=DEFAULT_ENDPOINT, help=f"TRACE API endpoint (default: {DEFAULT_ENDPOINT})")
+    parser = argparse.ArgumentParser(description="KAVACH V8.0 Hardware Gateway Companion Daemon")
+    parser.add_argument("--endpoint", default=DEFAULT_ENDPOINT, help=f"KAVACH API endpoint (default: {DEFAULT_ENDPOINT})")
     parser.add_argument("--port", default=None, help="Serial port device (e.g. /dev/ttyUSB0 or COM3)")
     parser.add_argument("--baud", type=int, default=DEFAULT_BAUD, help=f"Serial baud rate (default: {DEFAULT_BAUD})")
     parser.add_argument("--gateway-id", default=DEFAULT_GATEWAY_ID, help=f"Gateway Identifier (default: {DEFAULT_GATEWAY_ID})")
@@ -374,7 +374,7 @@ def main():
         list_available_ports()
         sys.exit(0)
 
-    daemon = TraceGatewayDaemon(
+    daemon = KavachGatewayDaemon(
         endpoint=args.endpoint,
         port=args.port,
         baud=args.baud,

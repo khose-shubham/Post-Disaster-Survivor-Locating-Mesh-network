@@ -90,7 +90,7 @@ import type {
   RescueOperationStatus,
 } from "@/lib/kavach/types";
 import { cn } from "@/lib/utils";
-import { API_CONTRACT, createTraceApi } from "@/lib/kavach/api";
+import { API_CONTRACT, createKavachApi } from "@/lib/kavach/api";
 import { localXY } from "./MapCanvas";
 import { TacticalScene, DemoWalkthrough } from "./TacticalScene";
 import { NodeDetail } from "./NodeDetail";
@@ -152,10 +152,10 @@ function Heading({
   return (
     <div className="flex flex-wrap items-end justify-between gap-4 mb-5 border-b border-border/60 pb-4">
       <div>
-        <p className="trace-label text-[9px] font-semibold tracking-wider text-primary mb-1">
-          TRACE / {category}
+        <p className="kavach-label text-[9px] font-semibold tracking-wider text-primary mb-1">
+          KAVACH / {category}
         </p>
-        <h1 className="trace-heading text-foreground">{title}</h1>
+        <h1 className="kavach-heading text-foreground">{title}</h1>
         <p className="text-xs text-muted-foreground mt-1 max-w-2xl">{sub}</p>
       </div>
       {action && <div className="flex items-center gap-2">{action}</div>}
@@ -210,7 +210,7 @@ function Transport() {
   return (
     <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-2.5 px-4 rounded-md border border-border bg-card text-xs">
       <div className="flex items-center gap-3">
-        <span className="trace-label text-[9px] text-muted-foreground">TRANSPORT</span>
+        <span className="kavach-label text-[9px] text-muted-foreground">TRANSPORT</span>
         <span className="flex items-center gap-1.5 text-primary font-medium">
           <RadioTower size={14} />
           LoRa 868.1 MHz Mesh / Relay
@@ -470,7 +470,7 @@ export function Overview() {
               calibration={k.calibration}
               selectedNode={selected}
               onSelectNode={setSelected}
-              className="trace-map min-h-[460px] lg:min-h-[520px] rounded-xl"
+              className="kavach-map min-h-[460px] lg:min-h-[520px] rounded-xl"
             />
           </div>
 
@@ -578,7 +578,7 @@ export function Overview() {
               </Badge>
             </div>
 
-            <div className="space-y-2 max-h-[220px] overflow-y-auto trace-scroll pr-1">
+            <div className="space-y-2 max-h-[220px] overflow-y-auto kavach-scroll pr-1">
               {k.detections.slice(0, 5).map((d) => (
                 <div
                   key={d.id}
@@ -675,7 +675,7 @@ export function MapLegend() {
     <div className="space-y-2">
       <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-md bg-card border border-border text-xs">
         <div className="flex items-center gap-2">
-          <span className="trace-label text-[9px] text-muted-foreground">
+          <span className="kavach-label text-[9px] text-muted-foreground">
             MAP SYMBOLOGY & DISTINCTIONS
           </span>
         </div>
@@ -743,24 +743,24 @@ export function Tactical() {
       {/* Search Map Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">SEARCH ZONES</p>
+          <p className="kavach-label text-[9px]">SEARCH ZONES</p>
           <p className="mono-num text-xl font-bold text-warning mt-1">{k.zones.length}</p>
           <p className="text-[10px] text-muted-foreground">Probable search areas</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">ACTIVE ANCHORS</p>
+          <p className="kavach-label text-[9px]">ACTIVE ANCHORS</p>
           <p className="mono-num text-xl font-bold text-foreground mt-1">
             {onlineCount}/{k.nodes.length}
           </p>
           <p className="text-[10px] text-muted-foreground">Reporting sniffers + gateway</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">SEARCH FIELD BOUNDS</p>
+          <p className="kavach-label text-[9px]">SEARCH FIELD BOUNDS</p>
           <p className="mono-num text-xl font-bold text-primary mt-1">520 × 520 m</p>
           <p className="text-[10px] text-muted-foreground">Disaster Sector Delta</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">HEURISTIC CONFIDENCE</p>
+          <p className="kavach-label text-[9px]">HEURISTIC CONFIDENCE</p>
           <p className="mono-num text-xl font-bold text-primary mt-1">{z?.confidence ?? 0}%</p>
           <p className="text-[10px] text-muted-foreground">GDOP & residual factored</p>
         </div>
@@ -772,7 +772,7 @@ export function Tactical() {
         calibration={k.calibration}
         selectedNode={selected}
         onSelectNode={setSelected}
-        className="trace-map !h-[600px] rounded-md"
+        className="kavach-map !h-[600px] rounded-md"
       />
 
       <MapLegend />
@@ -1111,7 +1111,7 @@ export function Simulation() {
                 nodes={k.nodes}
                 zones={k.zones}
                 calibration={k.calibration}
-                className="trace-map !h-[500px] rounded-md"
+                className="kavach-map !h-[500px] rounded-md"
                 editable
                 showTruth
                 onMoveSignal={(x, y) => k.setSignal({ x, y })}
@@ -1120,13 +1120,13 @@ export function Simulation() {
               {/* Simulation Diagnostics Bar */}
               <div className="grid grid-cols-3 gap-3 panel p-3 text-xs">
                 <div>
-                  <p className="trace-label text-[9px] text-success">Synthetic Ground Truth</p>
+                  <p className="kavach-label text-[9px] text-success">Synthetic Ground Truth</p>
                   <p className="mono-num font-semibold text-foreground mt-1">
                     {s ? `${s.x.toFixed(1)}, ${s.y.toFixed(1)} m` : "No active source"}
                   </p>
                 </div>
                 <div>
-                  <p className="trace-label text-[9px] text-warning">Estimated Search Centre</p>
+                  <p className="kavach-label text-[9px] text-warning">Estimated Search Centre</p>
                   <p className="mono-num font-semibold text-warning mt-1">
                     {z
                       ? `${localXY(z).x.toFixed(1)}, ${localXY(z).y.toFixed(1)} m`
@@ -1134,7 +1134,7 @@ export function Simulation() {
                   </p>
                 </div>
                 <div>
-                  <p className="trace-label text-[9px]">Simulation Distance Error</p>
+                  <p className="kavach-label text-[9px]">Simulation Distance Error</p>
                   <p className="mono-num font-semibold text-foreground mt-1">
                     {error != null ? `${error.toFixed(1)} m` : "Unavailable"}
                   </p>
@@ -1292,7 +1292,7 @@ export function Simulation() {
                   </Button>
 
                   <div className="pt-2 border-t border-border/60 space-y-1.5">
-                    <p className="trace-label text-[9px] text-muted-foreground">
+                    <p className="kavach-label text-[9px] text-muted-foreground">
                       Toggle Individual Node Status
                     </p>
                     <div className="grid grid-cols-2 gap-1.5">
@@ -1498,7 +1498,7 @@ export function Simulation() {
                     3. Estimator Pipeline
                   </span>
                   <p className="font-semibold text-primary text-xs">
-                    {k.estimationReport?.estimatorVersion ?? "TRACE-EST-V6.1-GDOP"}
+                    {k.estimationReport?.estimatorVersion ?? "KAVACH-EST-V6.1-GDOP"}
                   </p>
                   <p className="text-[10px] text-muted-foreground">
                     GDOP: {k.estimationReport?.gdop?.toFixed(2) ?? "1.00"} · Residual: ±
@@ -1551,7 +1551,7 @@ export function Simulation() {
                       </div>
 
                       <div className="overflow-x-auto">
-                        <table className="trace-table text-[11px]">
+                        <table className="kavach-table text-[11px]">
                           <thead>
                             <tr>
                               <th>Parameter / Metric</th>
@@ -1707,7 +1707,7 @@ export function Simulation() {
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-foreground text-xs flex items-center gap-2">
                       <Cpu size={14} className="text-primary" />
-                      Multilateration Pipeline Trace & Rejection Log
+                      Multilateration Pipeline Kavach & Rejection Log
                     </span>
                     <Badge variant="outline" className="text-[10px] font-mono">
                       Status: {k.estimationReport.eligibilityStatus.toUpperCase()}
@@ -1716,7 +1716,7 @@ export function Simulation() {
 
                   {k.estimationReport.rejectedObservations.length > 0 ? (
                     <div className="overflow-x-auto">
-                      <table className="trace-table text-[11px]">
+                      <table className="kavach-table text-[11px]">
                         <thead>
                           <tr>
                             <th>Rejected Station</th>
@@ -1863,29 +1863,29 @@ export function NodeInventory({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           <div className="panel p-3">
-            <p className="trace-label text-[9px]">TOTAL NODES</p>
+            <p className="kavach-label text-[9px]">TOTAL NODES</p>
             <p className="mono-num text-xl font-bold text-foreground mt-1">{k.nodes.length}</p>
             <p className="text-[10px] text-muted-foreground">
               {k.mode === "simulation" ? "Simulated nodes" : "Discovered nodes"}
             </p>
           </div>
           <div className="panel p-3">
-            <p className="trace-label text-[9px]">ONLINE</p>
+            <p className="kavach-label text-[9px]">ONLINE</p>
             <p className="mono-num text-xl font-bold text-success mt-1">{onlineCount}</p>
             <p className="text-[10px] text-muted-foreground">Active heartbeats</p>
           </div>
           <div className="panel p-3">
-            <p className="trace-label text-[9px]">DEGRADED</p>
+            <p className="kavach-label text-[9px]">DEGRADED</p>
             <p className="mono-num text-xl font-bold text-warning mt-1">{degradedCount}</p>
             <p className="text-[10px] text-muted-foreground">High loss / low battery</p>
           </div>
           <div className="panel p-3">
-            <p className="trace-label text-[9px]">OFFLINE</p>
+            <p className="kavach-label text-[9px]">OFFLINE</p>
             <p className="mono-num text-xl font-bold text-critical mt-1">{offlineCount}</p>
             <p className="text-[10px] text-muted-foreground">Heartbeat lost</p>
           </div>
           <div className="panel p-3">
-            <p className="trace-label text-[9px]">MEAN BATTERY</p>
+            <p className="kavach-label text-[9px]">MEAN BATTERY</p>
             <p className="mono-num text-xl font-bold text-foreground mt-1">{meanBattery}%</p>
             <p className="text-[10px] text-muted-foreground">18650 power packs</p>
           </div>
@@ -1927,7 +1927,7 @@ export function NodeInventory({ compact = false }: { compact?: boolean }) {
       )}
 
       <div className="overflow-x-auto border border-border rounded-md panel">
-        <table className="trace-table">
+        <table className="kavach-table">
           <thead>
             <tr>
               <th
@@ -2149,7 +2149,7 @@ export function Detections() {
       <Heading
         category="FIELD NETWORK"
         title="Detection Feed"
-        sub="Traceable crowd-signal observations (Wi-Fi probe requests and BLE advertising beacons)"
+        sub="Kavachable crowd-signal observations (Wi-Fi probe requests and BLE advertising beacons)"
         action={
           <Button
             variant="outline"
@@ -2191,22 +2191,22 @@ export function Detections() {
       {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">TOTAL OBSERVATIONS</p>
+          <p className="kavach-label text-[9px]">TOTAL OBSERVATIONS</p>
           <p className="mono-num text-xl font-bold text-foreground mt-1">{k.detections.length}</p>
           <p className="text-[10px] text-muted-foreground">Session crowd detections</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">BLE BEACONS</p>
+          <p className="kavach-label text-[9px]">BLE BEACONS</p>
           <p className="mono-num text-xl font-bold text-primary mt-1">{bleCount}</p>
           <p className="text-[10px] text-muted-foreground">2.4 GHz advertising frames</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">WI-FI PROBES</p>
+          <p className="kavach-label text-[9px]">WI-FI PROBES</p>
           <p className="mono-num text-xl font-bold text-primary mt-1">{wifiCount}</p>
           <p className="text-[10px] text-muted-foreground">802.11 probe requests</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">DATA PROVENANCE</p>
+          <p className="kavach-label text-[9px]">DATA PROVENANCE</p>
           <p className="text-sm font-semibold text-warning mt-1.5 mono-num uppercase">
             {k.mode === "simulation" ? "SIMULATION MODE" : "HARDWARE MODE"}
           </p>
@@ -2256,7 +2256,7 @@ export function Detections() {
       </div>
 
       <div className="overflow-x-auto border border-border rounded-md panel">
-        <table className="trace-table">
+        <table className="kavach-table">
           <thead>
             <tr>
               {[
@@ -2922,7 +2922,7 @@ export function Incidents() {
           </Band>
 
           <Band title="Operational Incident Timeline">
-            <div className="max-h-80 overflow-y-auto trace-scroll space-y-2 pr-1">
+            <div className="max-h-80 overflow-y-auto kavach-scroll space-y-2 pr-1">
               {current.timeline.slice(-20).map((t, idx) => (
                 <div
                   key={`${t}-${idx}`}
@@ -2973,7 +2973,7 @@ export function Gateway() {
       {/* KPI Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <div className="panel p-4 space-y-1">
-          <p className="trace-label text-[9px]">LORA CONCENTRATOR</p>
+          <p className="kavach-label text-[9px]">LORA CONCENTRATOR</p>
           <div className="flex items-center gap-2 mt-1">
             <span
               className={cn(
@@ -2989,7 +2989,7 @@ export function Gateway() {
         </div>
 
         <div className="panel p-4 space-y-1">
-          <p className="trace-label text-[9px]">CONNECTED SNIFFERS</p>
+          <p className="kavach-label text-[9px]">CONNECTED SNIFFERS</p>
           <p className="mono-num text-2xl font-bold text-foreground mt-1">
             {connectedSniffers}
             <span className="text-xs font-normal text-muted-foreground">
@@ -3000,7 +3000,7 @@ export function Gateway() {
         </div>
 
         <div className="panel p-4 space-y-1">
-          <p className="trace-label text-[9px]">LAST HEARTBEAT</p>
+          <p className="kavach-label text-[9px]">LAST HEARTBEAT</p>
           <p className="mono-num text-sm font-semibold text-foreground mt-1.5">
             {gwNode?.lastPacket ? ago(gwNode.lastPacket) : "No verified heartbeat"}
           </p>
@@ -3010,7 +3010,7 @@ export function Gateway() {
         </div>
 
         <div className="panel p-4 space-y-1">
-          <p className="trace-label text-[9px]">INTERNET UPLINK</p>
+          <p className="kavach-label text-[9px]">INTERNET UPLINK</p>
           <p className="text-sm font-semibold text-muted-foreground mt-1.5">Local Mesh Only</p>
           <p className="text-[10px] text-muted-foreground">Tactical autonomous command</p>
         </div>
@@ -3067,13 +3067,13 @@ export function Gateway() {
         </Band>
       </div>
 
-      {/* TRACE V7 Gateway Ingress API & Physical Companion Daemon */}
+      {/* KAVACH V7 Gateway Ingress API & Physical Companion Daemon */}
       <div className="panel p-4 border border-border bg-card space-y-3 text-xs">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/70 pb-2.5">
           <div className="flex items-center gap-2">
             <RadioTower size={16} className="text-primary" />
             <span className="font-semibold text-sm text-foreground">
-              TRACE V7 Gateway Ingress API & Companion Daemon Bridge
+              KAVACH V7 Gateway Ingress API & Companion Daemon Bridge
             </span>
           </div>
           <Badge variant="outline" className="text-[10px] font-mono border-primary/40 text-primary">
@@ -3097,7 +3097,7 @@ export function Gateway() {
               <span className="text-[10px] font-mono text-muted-foreground">Linux / Windows</span>
             </div>
             <code className="block p-2 rounded bg-black/40 font-mono text-[10px] text-primary break-all">
-              python scripts/trace_gateway_daemon.py --port /dev/ttyUSB0 --baud 115200
+              python scripts/kavach_gateway_daemon.py --port /dev/ttyUSB0 --baud 115200
             </code>
             <p className="text-[10px] text-muted-foreground">
               Reads physical serial port on field laptop or Raspberry Pi.
@@ -3112,7 +3112,7 @@ export function Gateway() {
               <span className="text-[10px] font-mono text-muted-foreground">Zero-Hardware</span>
             </div>
             <code className="block p-2 rounded bg-black/40 font-mono text-[10px] text-warning break-all">
-              python scripts/trace_gateway_daemon.py --simulate --rate 2.0
+              python scripts/kavach_gateway_daemon.py --simulate --rate 2.0
             </code>
             <p className="text-[10px] text-muted-foreground">
               Generates calibrated multi-station LoRa packets with realistic path loss.
@@ -3131,7 +3131,7 @@ export function Gateway() {
         }
       >
         <div className="overflow-x-auto border border-border rounded-md">
-          <table className="trace-table">
+          <table className="kavach-table">
             <thead>
               <tr>
                 <th>Source Station</th>
@@ -3278,7 +3278,7 @@ export function Topology() {
       {/* Network Health KPI Bar */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">ACTIVE UPLINK LINKS</p>
+          <p className="kavach-label text-[9px]">ACTIVE UPLINK LINKS</p>
           <p className="mono-num text-xl font-bold text-foreground mt-1">
             {activeLinks.length}{" "}
             <span className="text-xs font-normal text-muted-foreground">
@@ -3288,21 +3288,21 @@ export function Topology() {
           <p className="text-[10px] text-muted-foreground">Peer-to-edge mesh</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">MEAN LORA SNR</p>
+          <p className="kavach-label text-[9px]">MEAN LORA SNR</p>
           <p className="mono-num text-xl font-bold text-primary mt-1">
             {meanSnr} {meanSnr !== "—" ? "dB" : ""}
           </p>
           <p className="text-[10px] text-muted-foreground">Sub-GHz RF channel</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">GATEWAY CONCENTRATOR</p>
+          <p className="kavach-label text-[9px]">GATEWAY CONCENTRATOR</p>
           <p className="mono-num text-xl font-bold text-success mt-1">
             {k.gatewayConnected ? "ONLINE" : "OFFLINE"}
           </p>
           <p className="text-[10px] text-muted-foreground">RAK2287 868 MHz ISM</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">WEAKEST RF LINK</p>
+          <p className="kavach-label text-[9px]">WEAKEST RF LINK</p>
           <p className="mono-num text-xl font-bold text-warning mt-1">
             {weakestNode ? `${weakestNode.id}` : "None"}
           </p>
@@ -3383,7 +3383,7 @@ export function Topology() {
         }
       >
         <div className="overflow-x-auto border border-border rounded-md">
-          <table className="trace-table">
+          <table className="kavach-table">
             <thead>
               <tr>
                 <th>Link Source</th>
@@ -3611,28 +3611,28 @@ export function Analytics() {
       {/* Analytics KPI Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">PACKET DELIVERY RATE</p>
+          <p className="kavach-label text-[9px]">PACKET DELIVERY RATE</p>
           <p className="mono-num text-xl font-bold text-success mt-1">{deliveryRate}%</p>
           <p className="text-[10px] text-muted-foreground">
             {totalReceived} RX / {totalLost} loss
           </p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">SAMPLE DENSITY</p>
+          <p className="kavach-label text-[9px]">SAMPLE DENSITY</p>
           <p className="mono-num text-xl font-bold text-foreground mt-1">
             {filteredSamples.length}
           </p>
           <p className="text-[10px] text-muted-foreground">Rolling buffer points</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">MEAN CONFIDENCE</p>
+          <p className="kavach-label text-[9px]">MEAN CONFIDENCE</p>
           <p className="mono-num text-xl font-bold text-primary mt-1">
             {k.zones[0]?.confidence ?? 0}%
           </p>
           <p className="text-[10px] text-muted-foreground">Active zone heuristic</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">SEARCH RADIUS</p>
+          <p className="kavach-label text-[9px]">SEARCH RADIUS</p>
           <p className="mono-num text-xl font-bold text-warning mt-1">
             {k.zones[0] ? `±${k.zones[0].radius} m` : "—"}
           </p>
@@ -3656,7 +3656,7 @@ export function Analytics() {
                     {filteredSamples.at(-1)?.[chart.key as keyof (typeof k.samples)[0]] ?? "—"}
                   </span>
                 </div>
-                <div className="trace-chart !h-[200px]">
+                <div className="kavach-chart !h-[200px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={filteredSamples}>
                       <CartesianGrid stroke="#263449" strokeDasharray="3 3" />
@@ -4151,7 +4151,7 @@ export function Reports() {
       {/* Search Zones Table */}
       <Band title="Estimated Search-Priority Zones">
         <div className="overflow-x-auto border border-border rounded-md">
-          <table className="trace-table">
+          <table className="kavach-table">
             <thead>
               <tr>
                 <th>Zone ID</th>
@@ -4205,7 +4205,7 @@ export function Reports() {
                 Estimator Implementation
               </span>
               <p className="mono-num text-xs font-semibold text-primary mt-1">
-                {k.estimationReport?.estimatorVersion ?? "TRACE-EST-V6.1-GDOP"}
+                {k.estimationReport?.estimatorVersion ?? "KAVACH-EST-V6.1-GDOP"}
               </p>
               <p className="text-[10px] text-muted-foreground">
                 Weighted least-squares multilateration
@@ -4267,7 +4267,7 @@ export function Reports() {
       {/* Incident Audit Trail Event History */}
       <Band title={`Incident Audit Trail Event History (${current?.name ?? "Tactical Session"})`}>
         <div className="overflow-x-auto border border-border rounded-md">
-          <table className="trace-table text-[11px]">
+          <table className="kavach-table text-[11px]">
             <thead>
               <tr>
                 <th>Event ID</th>
@@ -4344,7 +4344,7 @@ export function Reports() {
       {/* Rescue Operations & Confirmed Casualties Registry */}
       <Band title="Rescue Operations & Confirmed Casualties Registry">
         <div className="overflow-x-auto border border-border rounded-md">
-          <table className="trace-table">
+          <table className="kavach-table">
             <thead>
               <tr>
                 <th>Operation ID & Mission</th>
@@ -4462,16 +4462,16 @@ export function Hardware() {
 
   const handleDownloadHeader = () => {
     const headerContent = `/**
- * TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
+ * KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
  * Auto-generated Microcontroller Hardware Configuration
  * Target Board: ESP32 DevKit v1 + SX1278 (868 MHz)
  * Node Station: ${selectedHwNode}
  */
 
-#ifndef TRACE_HARDWARE_CONFIG_H
-#define TRACE_HARDWARE_CONFIG_H
+#ifndef KAVACH_HARDWARE_CONFIG_H
+#define KAVACH_HARDWARE_CONFIG_H
 
-#define TRACE_NODE_ID "${selectedHwNode}"
+#define KAVACH_NODE_ID "${selectedHwNode}"
 #define LORA_FREQUENCY ${Number(hwFreq) * 1e6} // ${hwFreq} MHz
 #define LORA_SPREADING_FACTOR ${hwSf}
 #define LORA_CODING_RATE ${hwCr === "4/5" ? "5" : "8"}
@@ -4494,13 +4494,13 @@ export function Hardware() {
 #define PIN_SW420_ADC 34
 #define PIN_BATT_ADC  35
 
-#endif // TRACE_HARDWARE_CONFIG_H
+#endif // KAVACH_HARDWARE_CONFIG_H
 `;
     const blob = new Blob([headerContent], { type: "text/x-c;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `trace_config_${selectedHwNode.toLowerCase()}.h`;
+    link.download = `kavach_config_${selectedHwNode.toLowerCase()}.h`;
     link.click();
     URL.revokeObjectURL(url);
     toast.success(`Generated C firmware header for ${selectedHwNode}`);
@@ -4633,7 +4633,7 @@ export function Hardware() {
       {/* Bill of Materials */}
       <Band title="Sniffer Hardware Bill of Materials (BoM)">
         <div className="overflow-x-auto border border-border rounded-md">
-          <table className="trace-table">
+          <table className="kavach-table">
             <thead>
               <tr>
                 <th>Component</th>
@@ -4845,7 +4845,7 @@ export function ApiDocs() {
         setValidationResult({
           checked: true,
           valid: true,
-          message: `Payload Validated: Conforms to TRACE Ingestion Contract (Device: ${parsed.deviceId}, Seq: #${parsed.seq})`,
+          message: `Payload Validated: Conforms to KAVACH Ingestion Contract (Device: ${parsed.deviceId}, Seq: #${parsed.seq})`,
           details: `Parsed Measurements: Sound ${parsed.measurements?.sound_db} dB, Vibration ${parsed.measurements?.vibration_g} g, Thermal ${parsed.measurements?.thermal_c} °C, Detections: ${parsed.detections?.length ?? 0}`,
         });
         toast.success("Telemetry payload passed schema validation");
@@ -4981,7 +4981,7 @@ export function ApiDocs() {
           <p className="mono-num text-xs font-semibold text-primary">
             {serverHealth?.version ? `v${serverHealth.version}` : "v7.0.0"}
           </p>
-          <p className="text-[10px] text-muted-foreground">TRACE-EST-V6.1-GDOP Engine</p>
+          <p className="text-[10px] text-muted-foreground">KAVACH-EST-V6.1-GDOP Engine</p>
         </div>
 
         <div className="p-3 rounded bg-card border border-border space-y-1">
@@ -4989,7 +4989,7 @@ export function ApiDocs() {
             GATEWAY DAEMON
           </span>
           <p className="mono-num text-[11px] font-semibold text-warning truncate">
-            scripts/trace_gateway_daemon.py
+            scripts/kavach_gateway_daemon.py
           </p>
           <p className="text-[10px] text-muted-foreground">Physical USB/UART Bridge</p>
         </div>
@@ -5235,7 +5235,7 @@ export function Health() {
     {
       name: "Localization Engine",
       status: "Healthy",
-      detail: "Weighted Least-Squares (<1ms solver, TRACE-EST-V6.1-GDOP)",
+      detail: "Weighted Least-Squares (<1ms solver, KAVACH-EST-V6.1-GDOP)",
     },
     {
       name: "Database Persistence",
@@ -5520,7 +5520,7 @@ export function Settings({
   const check = async () => {
     setChecking(true);
     try {
-      const result = await createTraceApi(k.apiUrl).read("/api/v1/nodes");
+      const result = await createKavachApi(k.apiUrl).read("/api/v1/nodes");
       if (
         !result ||
         typeof result !== "object" ||
@@ -5562,7 +5562,7 @@ export function Settings({
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "trace_system_settings.json";
+    link.download = "kavach_system_settings.json";
     link.click();
     URL.revokeObjectURL(url);
     toast.success("Exported system settings JSON profile");
@@ -5902,7 +5902,7 @@ export function SurvivorIntelligence() {
       <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
         <div className="panel p-3 space-y-1">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="trace-label text-[9px]">POSSIBLE SURVIVORS</span>
+            <span className="kavach-label text-[9px]">POSSIBLE SURVIVORS</span>
             <HelpCircle size={13} />
           </div>
           <p
@@ -5920,7 +5920,7 @@ export function SurvivorIntelligence() {
 
         <div className="panel p-3 space-y-1">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="trace-label text-[9px]">CONFIRMED SURVIVORS</span>
+            <span className="kavach-label text-[9px]">CONFIRMED SURVIVORS</span>
             <UserCheck size={13} className="text-primary" />
           </div>
           <p className="mono-num text-2xl font-bold text-primary mt-1">{confirmedCount}</p>
@@ -5929,7 +5929,7 @@ export function SurvivorIntelligence() {
 
         <div className="panel p-3 space-y-1">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="trace-label text-[9px]">RESCUED CASUALTIES</span>
+            <span className="kavach-label text-[9px]">RESCUED CASUALTIES</span>
             <CheckCircle2 size={13} className="text-success" />
           </div>
           <p className="mono-num text-2xl font-bold text-success mt-1">{rescuedCount}</p>
@@ -5938,7 +5938,7 @@ export function SurvivorIntelligence() {
 
         <div className="panel p-3 space-y-1">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="trace-label text-[9px]">AWAITING RESCUE</span>
+            <span className="kavach-label text-[9px]">AWAITING RESCUE</span>
             <HeartPulse size={13} className="text-critical" />
           </div>
           <p className="mono-num text-2xl font-bold text-critical mt-1">{awaitingCount}</p>
@@ -5947,7 +5947,7 @@ export function SurvivorIntelligence() {
 
         <div className="panel p-3 space-y-1">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="trace-label text-[9px]">UNVERIFIED SIGNALS</span>
+            <span className="kavach-label text-[9px]">UNVERIFIED SIGNALS</span>
             <Radar size={13} />
           </div>
           <p className="mono-num text-2xl font-bold text-foreground mt-1">{unverifiedCount}</p>
@@ -5956,7 +5956,7 @@ export function SurvivorIntelligence() {
 
         <div className="panel p-3 space-y-1">
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="trace-label text-[9px]">SEARCH ZONES</span>
+            <span className="kavach-label text-[9px]">SEARCH ZONES</span>
             <CircleDot size={13} className="text-warning" />
           </div>
           <p className="mono-num text-2xl font-bold text-warning mt-1">{zonesCount}</p>
@@ -5967,7 +5967,7 @@ export function SurvivorIntelligence() {
       {/* Mode Provenance Banner */}
       <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2 rounded-md border border-border bg-card text-xs">
         <div className="flex items-center gap-2">
-          <span className="trace-label text-[9px] text-muted-foreground">PROVENANCE:</span>
+          <span className="kavach-label text-[9px] text-muted-foreground">PROVENANCE:</span>
           <Badge
             variant="outline"
             className={cn(
@@ -6032,7 +6032,7 @@ export function SurvivorIntelligence() {
         }
       >
         <div className="overflow-x-auto border border-border rounded-md">
-          <table className="trace-table">
+          <table className="kavach-table">
             <thead>
               <tr>
                 {[
@@ -6550,7 +6550,7 @@ export function RescueOperations() {
           <span>RESCUE COORDINATION PROTOCOL</span>
         </div>
         <p className="text-[11px] text-muted-foreground">
-          TRACE records and supports incident coordination and chronological logging for field
+          KAVACH records and supports incident coordination and chronological logging for field
           commanders. It does not replace trained emergency search and rescue personnel, and does
           not trigger unverified external emergency dispatches.
         </p>
@@ -6559,37 +6559,37 @@ export function RescueOperations() {
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2.5">
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">TOTAL OPERATIONS</p>
+          <p className="kavach-label text-[9px]">TOTAL OPERATIONS</p>
           <p className="mono-num text-xl font-bold text-foreground mt-1">{totalOps}</p>
           <p className="text-[10px] text-muted-foreground">Registered missions</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">REPORTED</p>
+          <p className="kavach-label text-[9px]">REPORTED</p>
           <p className="mono-num text-xl font-bold text-warning mt-1">{reportedOps}</p>
           <p className="text-[10px] text-muted-foreground">Pending investigation</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">INVESTIGATING</p>
+          <p className="kavach-label text-[9px]">INVESTIGATING</p>
           <p className="mono-num text-xl font-bold text-primary mt-1">{investigatingOps}</p>
           <p className="text-[10px] text-muted-foreground">Ground team search</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">ACTIVE RESCUE</p>
+          <p className="kavach-label text-[9px]">ACTIVE RESCUE</p>
           <p className="mono-num text-xl font-bold text-critical mt-1">{activeOps}</p>
           <p className="text-[10px] text-muted-foreground">Heavy extraction</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">RESOLVED</p>
+          <p className="kavach-label text-[9px]">RESOLVED</p>
           <p className="mono-num text-xl font-bold text-success mt-1">{resolvedOps}</p>
           <p className="text-[10px] text-muted-foreground">Operation completed</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">TOTAL CONFIRMED</p>
+          <p className="kavach-label text-[9px]">TOTAL CONFIRMED</p>
           <p className="mono-num text-xl font-bold text-foreground mt-1">{totalConfirmed}</p>
           <p className="text-[10px] text-muted-foreground">Living casualties</p>
         </div>
         <div className="panel p-3">
-          <p className="trace-label text-[9px]">RESCUED / AWAITING</p>
+          <p className="kavach-label text-[9px]">RESCUED / AWAITING</p>
           <p className="mono-num text-xl font-bold text-success mt-1">
             {totalRescued}{" "}
             <span className="text-xs font-normal text-critical">/ {totalAwaiting}</span>
@@ -6624,7 +6624,7 @@ export function RescueOperations() {
 
       {/* Operations Table */}
       <div className="overflow-x-auto border border-border rounded-md panel">
-        <table className="trace-table">
+        <table className="kavach-table">
           <thead>
             <tr>
               {[
@@ -6718,7 +6718,7 @@ export function RescueOperations() {
           }
         }}
       >
-        <DialogContent className="sm:max-w-2xl max-h-[85vh] overflow-y-auto trace-scroll">
+        <DialogContent className="sm:max-w-2xl max-h-[85vh] overflow-y-auto kavach-scroll">
           {activeOpForModal && (
             <div className="space-y-4 text-xs">
               <div className="border-b border-border pb-3">
@@ -6950,7 +6950,7 @@ export function RescueOperations() {
                   <History size={14} className="text-primary" />
                   <span>Chronological Audit Log ({activeOpForModal.history.length} events)</span>
                 </div>
-                <div className="space-y-1.5 max-h-48 overflow-y-auto trace-scroll pr-1">
+                <div className="space-y-1.5 max-h-48 overflow-y-auto kavach-scroll pr-1">
                   {activeOpForModal.history.map((h) => (
                     <div
                       key={h.id}
@@ -7528,22 +7528,22 @@ export function Logs() {
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="panel p-3">
-          <p className="text-[10px] trace-label text-muted-foreground">TOTAL LOG RECORDS</p>
+          <p className="text-[10px] kavach-label text-muted-foreground">TOTAL LOG RECORDS</p>
           <p className="mono-num text-xl font-semibold mt-1 text-foreground">{k.logs.length}</p>
           <p className="text-[10px] text-muted-foreground mt-0.5">Rolling memory buffer</p>
         </div>
         <div className="panel p-3">
-          <p className="text-[10px] trace-label text-muted-foreground">AUDIT TRAIL EVENTS</p>
+          <p className="text-[10px] kavach-label text-muted-foreground">AUDIT TRAIL EVENTS</p>
           <p className="mono-num text-xl font-semibold mt-1 text-primary">{k.events.length}</p>
           <p className="text-[10px] text-muted-foreground mt-0.5">Persisted operational ledger</p>
         </div>
         <div className="panel p-3">
-          <p className="text-[10px] trace-label text-muted-foreground">WARNINGS / ANOMALIES</p>
+          <p className="text-[10px] kavach-label text-muted-foreground">WARNINGS / ANOMALIES</p>
           <p className="mono-num text-xl font-semibold mt-1 text-warning">{warnCount}</p>
           <p className="text-[10px] text-muted-foreground mt-0.5">Degraded states or losses</p>
         </div>
         <div className="panel p-3">
-          <p className="text-[10px] trace-label text-muted-foreground">DATA PROVENANCE</p>
+          <p className="text-[10px] kavach-label text-muted-foreground">DATA PROVENANCE</p>
           <p className="text-sm font-semibold mt-1.5 flex items-center gap-1.5 text-warning uppercase mono-num">
             {k.mode === "simulation" ? "SIMULATION MODE" : "HARDWARE MODE"}
           </p>
@@ -7961,7 +7961,7 @@ export function Logs() {
 export const AlertsPage = Alerts;
 export const LogsPage = Logs;
 
-export function TraceView({ view }: { view: string }) {
+export function KavachView({ view }: { view: string }) {
   const pages: Record<string, ReactNode> = {
     overview: <Overview />,
     map: <Tactical />,

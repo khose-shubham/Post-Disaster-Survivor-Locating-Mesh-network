@@ -1,4 +1,4 @@
-# TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
+# KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
 
 ## Project Status & Master Engineering Report
 
@@ -9,7 +9,7 @@
 
 ### Master Executive Summary: Final Consolidation Phase (V8.0)
 
-In this consolidation phase, the TRACE platform was systematically audited, simplified, and hardened against real IoT hardware requirements:
+In this consolidation phase, the KAVACH platform was systematically audited, simplified, and hardened against real IoT hardware requirements:
 
 1. **6 Essential Primary Workspaces**:
    - **Command Center (`/`)**: Tactical HUD with active incident status, connection badges, last telemetry received, search zone summary, and dynamic **Recommended Next Action** guidance.
@@ -32,7 +32,7 @@ In this consolidation phase, the TRACE platform was systematically audited, simp
    - SQLite persistent storage in `calibration_profiles` and `calibration_samples` tables with active profile switching.
 4. **Hardware Verification & Telemetry Protocol**:
    - Standardized versioned Telemetry Protocol v2.0 envelope with deduplication, bounds validation, and provenance tracking.
-   - Python companion daemon (`scripts/trace_gateway_daemon.py`) bridging USB serial (115200 baud) to REST ingress.
+   - Python companion daemon (`scripts/kavach_gateway_daemon.py`) bridging USB serial (115200 baud) to REST ingress.
    - Three ESP32 boards allocated and documented in `docs/HARDWARE_INVENTORY.md` with complete firmware in `firmware/`.
 5. **Quality Verification**:
    - **83 / 83** automated unit and integration tests passing (`npm test`).
@@ -43,7 +43,7 @@ In this consolidation phase, the TRACE platform was systematically audited, simp
 
 ### A. Project Identity & Objectives
 
-- **Name:** TRACE (Triangulated Rescue Aid via Crowd-Signal Estimation) — formerly KAVACH.
+- **Name:** KAVACH (Triangulated Rescue Aid via Crowd-Signal Estimation) — formerly KAVACH.
 - **Operational Context:** Production-oriented disaster-response tactical operations and research platform for urban search and rescue (USAR).
 - **Core Mission:** Rapid disaster-zone tactical command system that estimates probable survivor search areas from anonymized Wi-Fi/BLE crowd-signals, corroborated with physical multi-sensor telemetry (acoustic geophone, structural vibration, thermal imaging) transmitted across a resilient LoRa wireless mesh.
 - **Key Safety & Methodological Mandates:**
@@ -52,7 +52,7 @@ In this consolidation phase, the TRACE platform was systematically audited, simp
   - **Probabilistic Search Zones vs Verified Positions:** All estimated zones are probabilistic search areas with confidence radii and residual fit errors, _never_ verified GPS survivor pins.
   - **Zero Fabricated Coordinates or Survivor Counts:** Missing coordinates display as "GPS Unavailable"; insufficient sensor evidence displays as "Insufficient Evidence".
   - **Response Intervals vs Survival Predictions:** Elapsed operational coordination timelines are derived from real event timestamps and must never be interpreted as clinical survival-time predictions.
-  - **No Automated Dispatch:** TRACE records and supports tactical coordination for trained field commanders; it does not replace trained emergency responders or dispatch real-world 911 calls.
+  - **No Automated Dispatch:** KAVACH records and supports tactical coordination for trained field commanders; it does not replace trained emergency responders or dispatch real-world 911 calls.
 
 ---
 
@@ -63,7 +63,7 @@ In this consolidation phase, the TRACE platform was systematically audited, simp
 | **Runtime & Node**   | Node.js             | `v24.5.0` (with `npm 11.5.1`). Note: `bun` is not installed on system PATH.                              |
 | **Framework**        | TanStack Start      | `1.168.60` (SSR + Nitro beta `3.0.260603-beta`) with `@tanstack/react-router 1.170.41`                   |
 | **Core Libraries**   | React               | `19.2.0` (React DOM `19.2.0`)                                                                            |
-| **Styling**          | Tailwind CSS v4     | `@tailwindcss/vite 4.2.1` with TRACE COMMAND DARK design system tokens                                   |
+| **Styling**          | Tailwind CSS v4     | `@tailwindcss/vite 4.2.1` with KAVACH COMMAND DARK design system tokens                                   |
 | **3D Rendering**     | Three.js & R3F      | `three 0.186.1`, `@react-three/fiber 9.0.0`, `@react-three/drei 10.0.0` (100% offline procedural assets) |
 | **2D Mapping**       | Custom SVG Canvas   | Interactive pan, zoom, layer selection, coordinate mapping to local meters                               |
 | **Charts**           | Recharts            | `2.15.4` (8 time-series operational charts with unified theme tokens)                                    |
@@ -73,7 +73,7 @@ In this consolidation phase, the TRACE platform was systematically audited, simp
 
 ---
 
-### C. Design System: TRACE COMMAND DARK
+### C. Design System: KAVACH COMMAND DARK
 
 Unified design system with high-contrast emergency operations center aesthetic:
 
@@ -203,7 +203,7 @@ Organized into 4 operational groups with active indicators, live badges, and bre
 
 #### 7. Client-Side Data Persistence (`src/lib/kavach/persistence.ts`)
 
-- **SSR-Safe Storage Bundle:** Implements client-side schema versioning (`TRACE_OPS_V1`) persisting `operations`, `survivors`, and incident mission notes to browser `localStorage`.
+- **SSR-Safe Storage Bundle:** Implements client-side schema versioning (`KAVACH_OPS_V1`) persisting `operations`, `survivors`, and incident mission notes to browser `localStorage`.
 - **Integrity Guarantee:**
   - Records survive page refreshes and tab reloads.
   - Corrupted or invalid JSON envelopes are safely rejected with fallback to clean defaults.
@@ -235,7 +235,7 @@ Organized into 4 operational groups with active indicators, live badges, and bre
 | **Enhanced Telemetry Ingestion Contract**             | Implemented and tested              | Validation engine rejecting bad data & duplicates                     |
 | **Physical ESP32 / SX1276 Hardware Testing**          | Implemented but not hardware-tested | Firmware pinouts & contracts ready; no physical hardware connected    |
 | **Simulation Lab Scenarios & Noise Injection**        | Simulation only                     | Deterministic PRNG seed 20261012                                      |
-| **Direct 911 / Emergency Dispatch Integration**       | Planned / Prohibited                | Intentionally excluded; TRACE assists tactical triage only            |
+| **Direct 911 / Emergency Dispatch Integration**       | Planned / Prohibited                | Intentionally excluded; KAVACH assists tactical triage only            |
 | **Real Cloud / Remote Server Persistence**            | Planned                             | Browser-local persistence active; cloud DB pending backend deployment |
 
 ---
@@ -315,7 +315,7 @@ Organized into 4 operational groups with active indicators, live badges, and bre
 
 ### I. Summary of Phase 3 Accomplishments
 
-Phase 3 extends TRACE into an evidence-based disaster-response research and mission coordination platform:
+Phase 3 extends KAVACH into an evidence-based disaster-response research and mission coordination platform:
 
 1. Created dedicated **Survivor Intelligence** (`/survivors`) and **Rescue Operations** (`/operations`) pages.
 2. Implemented strict data integrity ensuring raw wireless emitters are never counted as survivors, and confirmed living casualties remain separate from rescued extractions.
@@ -328,21 +328,21 @@ Phase 3 extends TRACE into an evidence-based disaster-response research and miss
 
 ### J. Summary of Phase 4 Accomplishments: Cleanup, Deduplication & Optimization
 
-Phase 4 completed a comprehensive audit and optimization of the entire TRACE codebase:
+Phase 4 completed a comprehensive audit and optimization of the entire KAVACH codebase:
 
 1. **Obsolete Prototype Code Elimination:**
-   - Deleted `src/components/kavach/panels.tsx` (368 lines, 13.1 KB). Removed dead components: `KpiCard`, `SimulationControls`, `PrioritySearchPanel`, `MeshHealth`, `EventFeed`, `LastSeenTicker`, and `ZoneCard`. The active components (`EvidenceBars` and `LocalizationSettings`) were moved directly into `TracePages.tsx`.
-   - Deleted `src/components/kavach/pages.tsx` (946 lines, 35.6 KB). Removed dead prototype views: `CommandCenter`, `LiveMapPage`, `NodesPage`, `DetectionsPage`, and `SystemInfoPage` (which were earlier duplicated prototypes superseded by `Overview`, `Tactical`, `NodeInventory`, `Detections`, and `Hardware`/`Topology`/`ApiDocs`). The active components (`Alerts` and `Logs`) were moved directly into `TracePages.tsx`.
+   - Deleted `src/components/kavach/panels.tsx` (368 lines, 13.1 KB). Removed dead components: `KpiCard`, `SimulationControls`, `PrioritySearchPanel`, `MeshHealth`, `EventFeed`, `LastSeenTicker`, and `ZoneCard`. The active components (`EvidenceBars` and `LocalizationSettings`) were moved directly into `KavachPages.tsx`.
+   - Deleted `src/components/kavach/pages.tsx` (946 lines, 35.6 KB). Removed dead prototype views: `CommandCenter`, `LiveMapPage`, `NodesPage`, `DetectionsPage`, and `SystemInfoPage` (which were earlier duplicated prototypes superseded by `Overview`, `Tactical`, `NodeInventory`, `Detections`, and `Hardware`/`Topology`/`ApiDocs`). The active components (`Alerts` and `Logs`) were moved directly into `KavachPages.tsx`.
    - Total obsolete code eliminated: ~1,314 lines.
 
 2. **UI Component & Utility Deduplication:**
    - **Unified CSV Export Pipeline:** Consolidated `formatCsv` into `src/lib/utils.ts` and `exportCsv` into `src/components/kavach/common.tsx` with RFC-4180 escaping and formula injection protection (`=`, `+`, `-`, `@`). Replaced all ad-hoc CSV string builders. Both application pages and unit tests (`tests/csv-export.test.ts`) now share the identical pure formatting utility.
    - **Unified Empty State:** Replaced local `function Empty` across `Overview`, `Simulation`, `NodeInventory`, `Detections`, `Analytics`, and `RescueOperations` with the shared, flexible `EmptyState` component from `common.tsx`.
-   - **Unified Page Headers:** Updated `Alerts` and `Logs` to use the standard TRACE `Heading` component with category breadcrumbs (`TRACE / OPERATIONS` and `TRACE / SYSTEM`) for design consistency.
+   - **Unified Page Headers:** Updated `Alerts` and `Logs` to use the standard KAVACH `Heading` component with category breadcrumbs (`KAVACH / OPERATIONS` and `KAVACH / SYSTEM`) for design consistency.
 
 3. **Code Cleanup & Import Pruning:**
    - Removed unused Lucide icon imports (`Database`, `FileCode2`, `FileText`, `Layers`, `MapPin`, `Shield`, `Siren`).
-   - Removed obsolete `./pages` and `./panels` imports from `TracePages.tsx`.
+   - Removed obsolete `./pages` and `./panels` imports from `KavachPages.tsx`.
    - Fixed all Prettier and ESLint formatting rules across the codebase.
 
 4. **Preserved Operational Features & Safety Mandates:**
@@ -355,7 +355,7 @@ Phase 4 completed a comprehensive audit and optimization of the entire TRACE cod
 
 ### K. Phase 5: Systematic Route-by-Route Operational Audit & Verification Status
 
-Comprehensive pre- and post-implementation audit of all 18 routes in the TRACE platform. Every page now provides useful information, meaningful interactions, and a clear operational purpose backed by real application state.
+Comprehensive pre- and post-implementation audit of all 18 routes in the KAVACH platform. Every page now provides useful information, meaningful interactions, and a clear operational purpose backed by real application state.
 
 | Route Path    | View Component         | Operational Purpose                                         | Pre-Audit Status     | Post-Phase 5 Status                      | Real State Source                                            | Delivered Functional Capabilities                                                                                                                                                                                                                                                                                                                                            |
 | ------------- | ---------------------- | ----------------------------------------------------------- | -------------------- | ---------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -373,7 +373,7 @@ Comprehensive pre- and post-implementation audit of all 18 routes in the TRACE p
 | `/alerts`     | `Alerts`               | Actionable technical & casualty alert queues                | Partially Functional | **Functional**                           | `state.alerts`                                               | Search input (`q`); status filters (`all`, `active`, `acknowledged`); alert category tabs (`all`, `system`, `estimator`, `gateway`, `operation`); direct navigation links to source node (`/nodes`), zone (`/map`), or rescue operation (`/operations`); acknowledge and acknowledge-all actions.                                                                            |
 | `/logs`       | `Logs`                 | Chronological system event stream                           | Partially Functional | **Functional**                           | `state.logs`                                                 | Component source filter dropdown (`all`, `gateway`, `estimator`, `mesh`, `telemetry`, `system`); search bar; severity filter; interactive Log Entry Event Details modal displaying formatted JSON payload, UTC timestamp, and source node link; RFC-4180 CSV export.                                                                                                         |
 | `/reports`    | `Reports`              | Situation Report (SITREP) generator & data export           | Partially Functional | **Functional**                           | `state.incidents`, `survivors`, `operations`, `zones`        | Incident mission selector dropdown to isolate SITREP reporting scope; auto-generated Executive Tactical SITREP Briefing card; printable mission report; RFC-4180 CSV downloads with formula injection prevention.                                                                                                                                                            |
-| `/hardware`   | `Hardware`             | Edge hardware specifications & firmware configuration       | Requires Hardware    | **Functional (Edge Firmware & Probing)** | Static specs + `state.nodes`                                 | Interactive Sniffer Station Hardware Profile selector (`NODE_N01` through `NODE_N05`) with live battery and coordinates; Web Serial API browser diagnostic port checker (`navigator.serial`); automated C firmware header generator (`trace_config_*.h`) with configurable frequency, spreading factor, coding rate, and TX power; ESP32-to-SX1278 SPI pinout table and BoM. |
+| `/hardware`   | `Hardware`             | Edge hardware specifications & firmware configuration       | Requires Hardware    | **Functional (Edge Firmware & Probing)** | Static specs + `state.nodes`                                 | Interactive Sniffer Station Hardware Profile selector (`NODE_N01` through `NODE_N05`) with live battery and coordinates; Web Serial API browser diagnostic port checker (`navigator.serial`); automated C firmware header generator (`kavach_config_*.h`) with configurable frequency, spreading factor, coding rate, and TX power; ESP32-to-SX1278 SPI pinout table and BoM. |
 | `/api-docs`   | `ApiDocs`              | REST API contract specifications & schemas                  | Functional           | **Functional**                           | Static contracts matching TypeScript interfaces              | Interactive Ingestion Payload Sandbox allowing operators to test and validate JSON telemetry payloads against `validateEnhancedTelemetry` with real-time pass/fail reports, schema validation messages, and quick sample templates; complete payload schema contracts.                                                                                                       |
 | `/health`     | `Health`               | Subsystem diagnostic readiness matrix                       | Functional           | **Functional**                           | Real-time diagnostic probes (`window.WebGL`, etc.)           | Interactive "Run Diagnostic Self-Test" suite benchmarking WebGL 3D context, storage quota allocation, multilateration solver execution speed (<0.1 ms), and data mode isolation; subsystem status matrix; uptime and latency monitors.                                                                                                                                       |
 | `/settings`   | `Settings`             | Localization calibration & persistence settings             | Partially Functional | **Functional**                           | `state.settings`, `localStorage`                             | Disaster Environment Presets (Urban Ruin $n=3.8$, Open Field $n=2.0$, Tunnel $n=4.5$) applying instant calibration; Export System Settings JSON profile; Reset to Defaults confirmation modal; RSSI reference & path-loss exponent sliders; clear client storage cache action.                                                                                               |
@@ -411,7 +411,7 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
 
 #### 4. System, Hardware & API Improvements (Batch 4)
 
-- **Hardware Setup (`/hardware`):** Added an interactive Sniffer Station Hardware Profile selector (`NODE_N01` through `NODE_N05`) with live battery and coordinates, a Web Serial API browser diagnostic port checker (`navigator.serial`) probing hardware connectivity, and an automated C firmware header generator (`trace_config_*.h`) with configurable frequency, spreading factor, coding rate, and TX power.
+- **Hardware Setup (`/hardware`):** Added an interactive Sniffer Station Hardware Profile selector (`NODE_N01` through `NODE_N05`) with live battery and coordinates, a Web Serial API browser diagnostic port checker (`navigator.serial`) probing hardware connectivity, and an automated C firmware header generator (`kavach_config_*.h`) with configurable frequency, spreading factor, coding rate, and TX power.
 - **API Reference (`/api-docs`):** Added an Interactive Ingestion Payload Sandbox allowing operators to test and validate JSON telemetry payloads against `validateEnhancedTelemetry` with real-time pass/fail reports, schema validation messages, and quick sample templates.
 - **System Health (`/health`):** Added an interactive "Run Diagnostic Self-Test" suite benchmarking WebGL 3D context, storage quota allocation, multilateration solver execution speed (<0.1 ms), and data mode isolation.
 - **Settings (`/settings`):** Added Disaster Environment Presets (Urban Ruin $n=3.8$, Open Field $n=2.0$, Tunnel $n=4.5$) applying instant calibration, Export System Settings JSON profile, and Reset to Defaults confirmation modal.
@@ -439,11 +439,11 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
 
 - **Web Serial & Local Peripheral Probing:** The browser UI checks `navigator.serial` availability and surfaces native port connection dialogs when supported. Physical microcontrollers (ESP32) require physical USB/UART connection to the client machine.
 - **Gateway Transport:** In live mode, gateway ingestion expects JSON envelopes matching `EnhancedTelemetryPacket` over HTTP/WebSocket or local serial-to-network bridge (e.g. `serial2ws` or Node gateway daemons).
-- **Zero Fabrication Guarantee:** When physical sensors are not reporting or GPS lock is absent, TRACE explicitly displays `"Not Reported"` or `"GPS Unavailable"`. Probabilistic search zones are strictly displayed with uncertainty radii and residual fit errors, never as confirmed survivor locations.
+- **Zero Fabrication Guarantee:** When physical sensors are not reporting or GPS lock is absent, KAVACH explicitly displays `"Not Reported"` or `"GPS Unavailable"`. Probabilistic search zones are strictly displayed with uncertainty radii and residual fit errors, never as confirmed survivor locations.
 
 ---
 
-## Phase 6 — TRACE V6: Real-Time Intelligence, Data Integration & Operational Reliability
+## Phase 6 — KAVACH V6: Real-Time Intelligence, Data Integration & Operational Reliability
 
 ### A. Features Implemented
 
@@ -455,10 +455,10 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
    - Added an integrated Evidence Inspector to the Signal Detections interface (`/detections`).
    - When a detection or observation is selected, inspects: Observation ID, source node, data source mode (`SIMULATION` badge vs `LIVE HARDWARE` badge), high-resolution timestamp, freshness status (`FRESH (<10s)`, `NOMINAL (<30s)`, `AGING (<60s)`, or `STALE (>60s)`), signal measurements (RSSI, frequency, protocol, distance estimate via log-distance path loss), sensor health status, validation status, whether the observation contributed to the position estimate, and explicit inclusion/rejection reasons.
 3. **Reproducible Estimation Workbench & Comparative Matrix (`/simulation`):**
-   - Enhanced the Simulation Lab with a Reproducible Estimation Workbench featuring a 4-tier provenance distinction: 1. Simulation Inputs (Deterministic Seed `20261012`), 2. Simulated Observations (Ingested vs Usable), 3. Estimator Pipeline (Version `TRACE-EST-V6.1-GDOP`), 4. Hypothetical Search Zone ($\pm R\text{ m}$ sweep prioritization).
+   - Enhanced the Simulation Lab with a Reproducible Estimation Workbench featuring a 4-tier provenance distinction: 1. Simulation Inputs (Deterministic Seed `20261012`), 2. Simulated Observations (Ingested vs Usable), 3. Estimator Pipeline (Version `KAVACH-EST-V6.1-GDOP`), 4. Hypothetical Search Zone ($\pm R\text{ m}$ sweep prioritization).
    - Added "Save Baseline Snapshot", "Update Baseline", and "Clear Baseline" actions.
    - Built a live comparison matrix comparing the saved baseline against active runs across RF Gaussian noise, obstruction attenuation, packet loss, sniffer constellation geometry, uncertainty radius, and confidence.
-   - Added manual "Run Pipeline Pass" button to force an immediate estimation pass and inspect the intermediate calculation trace and rejection table in real time.
+   - Added manual "Run Pipeline Pass" button to force an immediate estimation pass and inspect the intermediate calculation kavach and rejection table in real time.
 4. **Synchronized Map & Table Selection (`selectedNodeId`):**
    - Centralized `selectedNodeId` in state, linking the 2D Tactical Grid, 3D Disaster Scene, Node Inventory, and Detection Inspector. Selecting a sensor node highlights that exact station across 3D markers, 2D canvases, and tabular inventories.
 5. **Append-Only Event History & Auditability (`events: AppEvent[]`):**
@@ -474,13 +474,13 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
 ### B. Files Changed and Reasons
 
 - `src/lib/kavach/types.ts`: Added types for `AppEventType`, `AppEvent`, `RejectedObservationInfo`, `EstimationPipelineReport`, `SimulationRunSnapshot`; expanded `SearchZone` with `hypothetical_search_priority`; ensured strict TypeScript optionality compliance (`| undefined`).
-- `src/lib/kavach/engine.ts`: Implemented `ESTIMATOR_VERSION = "TRACE-EST-V6.1-GDOP"`, observation rejection tracking with explicit reasons, GDOP geometry calculations, collinearity warnings, and exported `runEstimationPipeline`.
+- `src/lib/kavach/engine.ts`: Implemented `ESTIMATOR_VERSION = "KAVACH-EST-V6.1-GDOP"`, observation rejection tracking with explicit reasons, GDOP geometry calculations, collinearity warnings, and exported `runEstimationPipeline`.
 - `src/lib/kavach/persistence.ts`: Upgraded persistence bundle to v2, storing and hydrating append-only `events: AppEvent[]` safely with payload verification.
 - `src/lib/kavach/state.ts`: Implemented pure typed state reducers for `advanceSimulation`, `switchScenario`, `switchMode`, `ingestHardwarePacket`, `seedInitialEvents`, synchronized `selectedNodeId`, and baseline snapshot comparison.
 - `src/lib/kavach/store.tsx`: Wired state reducers into React context, exposing `selectedNodeId`, `baselineRun`, `events`, and `estimationReport`. Added actions `saveBaselineRun`, `clearBaselineRun`, `runEstimationPass`, and `setSelectedNodeId`.
-- `src/components/kavach/TracePages.tsx`: Added Evidence Inspector panel to `SignalDetections`, Reproducible Estimation Workbench and Baseline Comparison Matrix to `SimulationLab`, synchronized `selectedNodeId` between `Tactical` map and `NodeInventory`, and added incident-filtered audit event stream to `Logs` and `Reports`.
-- `tests/trace-v6-reliability.test.ts`: Created targeted unit tests covering transparent pipeline rejection tracking, GDOP calculation, operational states, pseudo-random repeatability, audit event logging, and live hardware isolation.
-- `TRACE_PROJECT_REPORT.md`: Updated comprehensive documentation covering Sections A through L.
+- `src/components/kavach/KavachPages.tsx`: Added Evidence Inspector panel to `SignalDetections`, Reproducible Estimation Workbench and Baseline Comparison Matrix to `SimulationLab`, synchronized `selectedNodeId` between `Tactical` map and `NodeInventory`, and added incident-filtered audit event stream to `Logs` and `Reports`.
+- `tests/kavach-v6-reliability.test.ts`: Created targeted unit tests covering transparent pipeline rejection tracking, GDOP calculation, operational states, pseudo-random repeatability, audit event logging, and live hardware isolation.
+- `KAVACH_PROJECT_REPORT.md`: Updated comprehensive documentation covering Sections A through L.
 
 ### C. Data Architecture Changes
 
@@ -560,24 +560,24 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
 ### L. Recommended Next Development Phase
 
 1. **Phase 7: Real-Time Multi-Operator Sync (WebSockets / WebRTC):** Implement peer-to-peer or server-assisted delta synchronization for command post teams operating multiple tablets/workstations.
-2. **Phase 8: Hardware Bridge Companion Daemon (Go / Rust / Python):** Create a lightweight headless bridge daemon that reads serial packets from USB LoRa gateways and streams validated JSON envelopes directly into TRACE via WebSocket.
+2. **Phase 8: Hardware Bridge Companion Daemon (Go / Rust / Python):** Create a lightweight headless bridge daemon that reads serial packets from USB LoRa gateways and streams validated JSON envelopes directly into KAVACH via WebSocket.
 3. **Phase 9: Field Calibration Wizard:** Create an on-site RF calibration workflow where responders place a calibration beacon at known distances (1m, 5m, 10m) to calculate exact site path-loss exponent ($n$) and reference RSSI ($A_0$) before initiating search passes.
 
 ---
 
-## PHASE 7 — EDGE REST INGRESS API, HARDWARE COMPANION DAEMON & PHYSICAL SENSOR INTEGRATION (TRACE V7)
+## PHASE 7 — EDGE REST INGRESS API, HARDWARE COMPANION DAEMON & PHYSICAL SENSOR INTEGRATION (KAVACH V7)
 
 ### A. Summary of Completed V7 Enhancements
 
 1. **Architectural Audit & Resolution (Edge SSR Runtime Reality):**
-   - Conducted an in-depth architectural audit confirming TRACE is built on **TanStack Start with Cloudflare Nitro preset** (`vite.config.ts`), deployed as an Edge SSR application without a stateful Node/Go/Python daemon or relational database.
+   - Conducted an in-depth architectural audit confirming KAVACH is built on **TanStack Start with Cloudflare Nitro preset** (`vite.config.ts`), deployed as an Edge SSR application without a stateful Node/Go/Python daemon or relational database.
    - Server runtimes in edge/Nitro environments cannot directly bind physical OS serial/UART hardware ports (`/dev/ttyUSB0`, `COM3`).
    - Implemented the recommended dual-tier architecture:
      a. **Genuine Edge REST Ingress API (`/api/v1/*`)**: Intercepts HTTP requests directly in `src/server.ts` before SSR routing, powered by a dedicated request handler `src/lib/server/api-handler.ts`.
-     b. **Standalone Physical Gateway Companion Daemon (`scripts/trace_gateway_daemon.py`)**: A zero-external-dependency Python 3 daemon that interfaces directly with physical USB/UART serial ports (or runs a simulated packet emitter for automated test suites) and streams validated JSON envelopes via HTTP POST to the `/api/v1/telemetry/packet` ingress endpoint.
+     b. **Standalone Physical Gateway Companion Daemon (`scripts/kavach_gateway_daemon.py`)**: A zero-external-dependency Python 3 daemon that interfaces directly with physical USB/UART serial ports (or runs a simulated packet emitter for automated test suites) and streams validated JSON envelopes via HTTP POST to the `/api/v1/telemetry/packet` ingress endpoint.
 
 2. **Genuine Server-Side REST Ingress API Endpoints (`/api/v1/*`):**
-   - `GET /api/v1/health`: Returns server health status, version `7.0.0`, algorithm `TRACE-EST-V6.1-GDOP`, registered station count, ring buffer statistics, and complete endpoint specifications.
+   - `GET /api/v1/health`: Returns server health status, version `7.0.0`, algorithm `KAVACH-EST-V6.1-GDOP`, registered station count, ring buffer statistics, and complete endpoint specifications.
    - `POST /api/v1/telemetry/packet`: Ingests raw or normalized telemetry envelopes. Performs strict validation against physical and coordinate bounds (lat $\in [-90, 90]$, lon $\in [-180, 180]$, RSSI $\in [-150, 20]$ dBm, noise $\in [-160, 0]$ dBm, frequency $\in [100, 6000]$ MHz). Appends valid packets to an in-memory 200-packet ring buffer, updates station heartbeat registry, and returns HTTP 201 Created.
    - `GET /api/v1/telemetry/packet`: Queries buffered telemetry packets with support for `deviceId`, `since` (epoch timestamp), and `limit` filtering.
    - `POST /api/v1/nodes/heartbeat`: Ingests sniffer/gateway node heartbeats, updating station battery, firmware, and packet counters.
@@ -585,7 +585,7 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
    - `POST /api/v1/estimation/pipeline`: Runs the transparent multilateration estimation pipeline directly on the server, returning GDOP, residual error, usable observations, and spatial bounds.
    - `OPTIONS *`: CORS preflight handling with configurable `Access-Control-Allow-Origin`, `Methods`, and `Headers` to support cross-origin gateways and IoT edge hardware.
 
-3. **Standalone Hardware Gateway Companion Daemon (`scripts/trace_gateway_daemon.py`):**
+3. **Standalone Hardware Gateway Companion Daemon (`scripts/kavach_gateway_daemon.py`):**
    - Zero-dependency Python 3 implementation using only standard library modules (`urllib.request`, `json`, `time`, `argparse`, `sys`).
    - Supports physical serial ports via optional `pyserial` (`--port /dev/ttyUSB0` or `--port COM3`) with 115200 baud rate.
    - Includes automated `--simulate` mode generating realistic multi-station LoRa packets (Station Alpha, Bravo, Charlie, Delta) with Gaussian RSSI jitter and sensor telemetry for automated testing in environments without physical hardware.
@@ -596,7 +596,7 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
    - Added interactive "Send to Live Ingress API (POST /api/v1)" runner with real HTTP latency measurement and live response body inspection.
    - Upgraded Gateway Management (`/gateway`): Added Physical Hardware Companion Daemon control panel documenting terminal launch commands, baud rates, payload formats, and edge ingress URLs.
 
-5. **Comprehensive Automated Unit Testing (`tests/trace-v7-backend-api.test.ts`):**
+5. **Comprehensive Automated Unit Testing (`tests/kavach-v7-backend-api.test.ts`):**
    - Added 7 dedicated backend unit tests covering health check specifications, telemetry packet ingestion (HTTP 201), out-of-bounds input rejection (HTTP 400), ring buffer retrieval with deviceId filtering, node heartbeat registry, server-side multilateration execution, and telemetry normalization.
    - Expanded project test suite to **55/55 passing tests** (100% green).
 
@@ -604,11 +604,11 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
 
 - `src/server.ts`: Intercepts `/api/v1/*` requests before SSR routing and routes them to `handleApiV1Request(request, url)`.
 - `src/lib/server/api-handler.ts`: Core server-side API handler implementing `/api/v1/health`, `/api/v1/telemetry/packet` (GET/POST), `/api/v1/nodes/heartbeat` (POST), `/api/v1/nodes` (GET), `/api/v1/estimation/pipeline` (POST), CORS preflight handling, 200-packet ring buffer, station registry, and telemetry normalization.
-- `scripts/trace_gateway_daemon.py`: Standalone Python companion daemon for USB/UART serial bridge and zero-hardware packet simulation.
-- `src/components/kavach/TracePages.tsx`: Added Live Ingress Status HUD and interactive POST runner to `ApiDocs`; added companion daemon connection panel to `Gateway`.
+- `scripts/kavach_gateway_daemon.py`: Standalone Python companion daemon for USB/UART serial bridge and zero-hardware packet simulation.
+- `src/components/kavach/KavachPages.tsx`: Added Live Ingress Status HUD and interactive POST runner to `ApiDocs`; added companion daemon connection panel to `Gateway`.
 - `src/lib/kavach/api.ts`: Updated API documentation headers reflecting live REST API ingress boundary.
-- `tests/trace-v7-backend-api.test.ts`: Added 7 backend API tests validating endpoints, bounds checking, and multilateration.
-- `TRACE_PROJECT_REPORT.md`: Comprehensive documentation update for V7 in both workspace and root copies.
+- `tests/kavach-v7-backend-api.test.ts`: Added 7 backend API tests validating endpoints, bounds checking, and multilateration.
+- `KAVACH_PROJECT_REPORT.md`: Comprehensive documentation update for V7 in both workspace and root copies.
 
 ### C. Data Architecture Changes
 
@@ -616,7 +616,7 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
   ```
   Physical Sniffer Nodes (LoRa/BLE)
         ↓ (USB/UART Serial)
-  scripts/trace_gateway_daemon.py
+  scripts/kavach_gateway_daemon.py
         ↓ (HTTP POST /api/v1/telemetry/packet)
   Nitro Edge Server (src/server.ts -> api-handler.ts)
         ↓ (Ring Buffer & Heartbeat Registry)
@@ -656,7 +656,7 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
   - Command: `vite build`
   - Result: **PASSED**. Both client bundle and SSR Nitro server bundle generated successfully in `.output/`.
 - **Live Companion Daemon Execution:**
-  - Command: `python scripts/trace_gateway_daemon.py --simulate --max-packets 3 --rate 10.0`
+  - Command: `python scripts/kavach_gateway_daemon.py --simulate --max-packets 3 --rate 10.0`
   - Result: **PASSED**. Successfully ingested 3 simulated telemetry packets via HTTP POST into `/api/v1/telemetry/packet` with HTTP 201 Created responses.
 
 ### G. Known Limitations
@@ -688,13 +688,13 @@ Phase 5 transformed all 18 existing routes into high-utility, fully functional o
 
 - None. All 55 tests pass cleanly, 0 TypeScript errors, 0 linter errors, production build succeeds cleanly, and companion daemon verified against live dev server.
 
-### L. Transition to Production Full-Stack Platform (TRACE V8)
+### L. Transition to Production Full-Stack Platform (KAVACH V8)
 
 The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers the complete production-oriented disaster-response research platform with real database persistence, authentication, RBAC, REST API, SSE real-time stream, and end-to-end frontend integration.
 
 ---
 
-# TRACE V8 — FULL-STACK DISASTER-RESPONSE RESEARCH PLATFORM (FINAL PROJECT REPORT)
+# KAVACH V8 — FULL-STACK DISASTER-RESPONSE RESEARCH PLATFORM (FINAL PROJECT REPORT)
 
 ## 1. Current Architecture
 
@@ -706,7 +706,7 @@ The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers
   - **Persistence Tier (`src/server/db/`):** 15 relational tables with primary keys, foreign key constraints, indexes, UTC ISO timestamps, transactional integrity, automated schema migration tracking (`_migrations`), and demo data seeding.
   - **Security & Authorization Tier (`src/server/auth/`):** 5-role Role-Based Access Control (RBAC), `scrypt` password key derivation with constant-time verification, cryptographic session tokens, and sliding-window IP rate limiting.
   - **Real-Time Pub/Sub Event Bus (`src/server/realtime/event-bus.ts`):** In-process event emitter delivering domain events to connected clients via Server-Sent Events (SSE) at `GET /api/events/stream`.
-  - **Hardware Companion Daemon (`scripts/trace_gateway_daemon.py`):** Standalone zero-dependency Python 3 bridge reading physical USB/UART serial ports (`pyserial`) or generating realistic multi-station telemetry streams, transmitting via HTTP POST with `X-Trace-Gateway-Secret` header authentication.
+  - **Hardware Companion Daemon (`scripts/kavach_gateway_daemon.py`):** Standalone zero-dependency Python 3 bridge reading physical USB/UART serial ports (`pyserial`) or generating realistic multi-station telemetry streams, transmitting via HTTP POST with `X-Kavach-Gateway-Secret` header authentication.
 
 ## 2. Frontend Implementation
 
@@ -725,7 +725,7 @@ The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers
 - **Status:** `IMPLEMENTED AND VERIFIED`
 - **Modules Implemented (`src/server/`):**
   - `db/schema.ts`: DDL definitions for all 15 relational entities.
-  - `db/database.ts`: Database connection manager supporting both persistent file mode (`data/trace.db`) and in-memory test mode (`:memory:`), schema migration runner, scrypt password hashing, and demo seeding.
+  - `db/database.ts`: Database connection manager supporting both persistent file mode (`data/kavach.db`) and in-memory test mode (`:memory:`), schema migration runner, scrypt password hashing, and demo seeding.
   - `db/repositories.ts`: Typed repository abstractions enforcing constraints and database-side aggregation.
   - `auth/auth-service.ts`: Session lifecycle, role permission validation, sliding-window rate limiting, and HttpOnly cookie helpers.
   - `api/router.ts`: Unified REST dispatcher with body parsing, input validation, and RFC 7807 error formatting.
@@ -760,7 +760,7 @@ The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers
 
 - **Status:** `IMPLEMENTED AND VERIFIED`
 - **Password Security:** Salted `scrypt` hashing (16-byte cryptographically secure random salt, 64-byte key length) with timing-safe string comparison.
-- **Session Management:** Cryptographic UUID tokens stored in the `sessions` table with 24-hour expiration; supported via `Authorization: Bearer <token>` and `Cookie: trace_session=<token>`.
+- **Session Management:** Cryptographic UUID tokens stored in the `sessions` table with 24-hour expiration; supported via `Authorization: Bearer <token>` and `Cookie: kavach_session=<token>`.
 - **Role Hierarchy:**
   - `Administrator`: Full system access, node/gateway registration, and user administration.
   - `Incident Commander`: Incident creation, status transitions, priority updates, and report approval.
@@ -811,14 +811,14 @@ The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers
 ## 8. Hardware Integration Status
 
 - **Status:** `IMPLEMENTED AND VERIFIED` (Companion Daemon & Ingress); `REQUIRES PHYSICAL HARDWARE` (Physical LoRa Transceivers)
-- **Hardware Bridge Daemon (`scripts/trace_gateway_daemon.py`):** Fully operational Python 3 companion daemon supporting USB/UART serial ports (`pyserial`) and automated multi-station simulation.
-- **Gateway Authentication:** Supports `X-Trace-Gateway-Secret` header validation matching server `GATEWAY_SECRET`.
+- **Hardware Bridge Daemon (`scripts/kavach_gateway_daemon.py`):** Fully operational Python 3 companion daemon supporting USB/UART serial ports (`pyserial`) and automated multi-station simulation.
+- **Gateway Authentication:** Supports `X-Kavach-Gateway-Secret` header validation matching server `GATEWAY_SECRET`.
 - **Physical Verification:** Validated via live simulated LoRa packet transmission directly into the local backend with HTTP 201 Created responses.
 
 ## 9. Localization Engine
 
 - **Status:** `IMPLEMENTED AND VERIFIED`
-- **Algorithm Identifier:** `TRACE-EST-V6.1-GDOP`.
+- **Algorithm Identifier:** `KAVACH-EST-V6.1-GDOP`.
 - **Mathematical Pipeline:**
   - Multi-station log-distance path loss RSSI inversion ($d = d_0 \cdot 10^{\frac{A_0 - RSSI}{10n}}$).
   - Weighted least-squares multilateration with Levenberg-Marquardt damping.
@@ -830,7 +830,7 @@ The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers
 
 - **Status:** `IMPLEMENTED AND VERIFIED`
 - **Transport:** Server-Sent Events (SSE) via `GET /api/events/stream`.
-- **Event Bus:** `TraceEventBus` publishing `telemetry:accepted`, `node:status_changed`, `incident:updated`, `search_zone:updated`, `alert:acknowledged`, and `localization:completed`.
+- **Event Bus:** `KavachEventBus` publishing `telemetry:accepted`, `node:status_changed`, `incident:updated`, `search_zone:updated`, `alert:acknowledged`, and `localization:completed`.
 - **Heartbeat:** 25-second comment keep-alive (`: keepalive\n\n`) preventing proxy connection timeouts.
 - **Client Integration:** Connected in `src/lib/kavach/store.tsx`, automatically updating UI state upon incoming events.
 
@@ -841,16 +841,16 @@ The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers
 - **Brute-Force Protection:** Sliding-window IP rate limiting on `/api/auth/login`.
 - **SQL Injection Prevention:** 100% parameterized SQL queries across all repositories.
 - **Secret Protection:** `.env.example` template provided; no secrets or credentials committed to source code.
-- **Safe Error Handling:** RFC 7807 compliant error bodies concealing internal stack traces.
+- **Safe Error Handling:** RFC 7807 compliant error bodies concealing internal stack kavachs.
 
 ## 12. Test Results
 
 - **Status:** `IMPLEMENTED AND VERIFIED`
 - **Test Command:** `node --test --experimental-strip-types tests/**/*.test.ts`
 - **Result:** **75 / 75 tests PASSED (0 failures)** across 8 test suites:
-  - `tests/trace-db.test.ts`: 6 tests (Database, Migrations, Repositories, Analytics)
-  - `tests/trace-api-endpoints.test.ts`: 13 tests (Auth, Incidents, Telemetry, RBAC, SSE)
-  - `tests/trace-v7-backend-api.test.ts`: 7 tests (V7 Ingress, Ring Buffer, Bounds)
+  - `tests/kavach-db.test.ts`: 6 tests (Database, Migrations, Repositories, Analytics)
+  - `tests/kavach-api-endpoints.test.ts`: 13 tests (Auth, Incidents, Telemetry, RBAC, SSE)
+  - `tests/kavach-v7-backend-api.test.ts`: 7 tests (V7 Ingress, Ring Buffer, Bounds)
   - `tests/simulation-workflows.test.ts`: 7 tests (Scenarios, Ground Truth, Physics)
   - `tests/kavach-estimator.test.ts`: 11 tests (Multilateration, GDOP, Collinearity)
   - `tests/csv-export.test.ts`: 10 tests (Sanitization, Formula Injection)
@@ -873,14 +873,14 @@ The V7 implementation verified the dual-tier architecture. Phase 8 (V8) delivers
   3. Install dependencies: `npm install`.
   4. Run development server: `npm run dev`.
   5. Access web application at `http://localhost:8080`.
-  6. Login using demo credentials: `admin` / `TraceAdmin2026!`.
+  6. Login using demo credentials: `admin` / `KavachAdmin2026!`.
 
 ## 15. Deployment Instructions
 
 - **Status:** `IMPLEMENTED AND VERIFIED`
 - **Production Command:** `node .output/server/index.mjs`
-- **Environment Variables:** Set `NODE_ENV=production`, `PORT=8080`, `DATABASE_PATH=/var/lib/trace/trace.db`, `SESSION_SECRET=<random-32-char-key>`, and `GATEWAY_SECRET=<random-key>`.
-- **Database Backup:** Backup active database using SQLite online backup: `sqlite3 data/trace.db ".backup 'data/trace-backup.db'"`.
+- **Environment Variables:** Set `NODE_ENV=production`, `PORT=8080`, `DATABASE_PATH=/var/lib/kavach/kavach.db`, `SESSION_SECRET=<random-32-char-key>`, and `GATEWAY_SECRET=<random-key>`.
+- **Database Backup:** Backup active database using SQLite online backup: `sqlite3 data/kavach.db ".backup 'data/kavach-backup.db'"`.
 
 ## 16. Remaining Defects
 

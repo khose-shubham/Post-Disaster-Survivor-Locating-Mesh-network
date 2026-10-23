@@ -356,10 +356,10 @@ export function DevicesCalibration({
       {/* Page Header */}
       <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border/60 pb-4">
         <div>
-          <p className="trace-label text-[9px] font-semibold tracking-wider text-primary mb-1">
-            TRACE / HARDWARE WORKSPACE
+          <p className="kavach-label text-[9px] font-semibold tracking-wider text-primary mb-1">
+            KAVACH / HARDWARE WORKSPACE
           </p>
-          <h1 className="trace-heading text-foreground">Devices & Calibration</h1>
+          <h1 className="kavach-heading text-foreground">Devices & Calibration</h1>
           <p className="text-xs text-muted-foreground mt-1 max-w-2xl">
             Real hardware gateway monitoring, sniffer diagnostics, and RF empirical path-loss
             calibration wizard.
@@ -434,7 +434,7 @@ export function DevicesCalibration({
             {/* Gateway Concentrator */}
             <div className="panel p-3 space-y-1">
               <div className="flex items-center justify-between">
-                <span className="trace-label text-[9px] text-muted-foreground">
+                <span className="kavach-label text-[9px] text-muted-foreground">
                   GATEWAY CONCENTRATOR
                 </span>
                 <span
@@ -455,7 +455,7 @@ export function DevicesCalibration({
             {/* Ingestion API Endpoint */}
             <div className="panel p-3 space-y-1">
               <div className="flex items-center justify-between">
-                <span className="trace-label text-[9px] text-muted-foreground">
+                <span className="kavach-label text-[9px] text-muted-foreground">
                   INGRESS REST API
                 </span>
                 <Badge
@@ -476,7 +476,7 @@ export function DevicesCalibration({
             {/* Reporting Nodes */}
             <div className="panel p-3 space-y-1">
               <div className="flex items-center justify-between">
-                <span className="trace-label text-[9px] text-muted-foreground">ACTIVE NODES</span>
+                <span className="kavach-label text-[9px] text-muted-foreground">ACTIVE NODES</span>
                 <Badge variant="outline" className="text-[9px] font-mono">
                   {onlineNodes.length} / {k.nodes.length} ONLINE
                 </Badge>
@@ -494,7 +494,7 @@ export function DevicesCalibration({
             {/* Active Path-Loss Profile */}
             <div className="panel p-3 space-y-1">
               <div className="flex items-center justify-between">
-                <span className="trace-label text-[9px] text-muted-foreground">
+                <span className="kavach-label text-[9px] text-muted-foreground">
                   RF PATH-LOSS PROFILE
                 </span>
                 <Badge
@@ -523,25 +523,25 @@ export function DevicesCalibration({
                 </h3>
               </div>
               <Badge variant="outline" className="text-[9px] font-mono">
-                scripts/trace_gateway_daemon.py
+                scripts/kavach_gateway_daemon.py
               </Badge>
             </div>
             <p className="text-xs text-muted-foreground">
               To connect physical USB LoRa gateways or stream automated hardware telemetry directly
-              into this TRACE instance:
+              into this KAVACH instance:
             </p>
             <div className="bg-background/80 p-2.5 rounded border border-border font-mono text-[11px] text-foreground space-y-1">
               <p className="text-muted-foreground"># Windows USB COM Port Bridge:</p>
               <p className="text-primary">
-                python scripts/trace_gateway_daemon.py --port COM3 --baud 115200 --api-key
-                trace_dev_gateway_secret_2026
+                python scripts/kavach_gateway_daemon.py --port COM3 --baud 115200 --api-key
+                kavach_dev_gateway_secret_2026
               </p>
               <p className="text-muted-foreground pt-1">
                 # Automated Multi-Station Simulation (No Hardware Needed):
               </p>
               <p className="text-primary">
-                python scripts/trace_gateway_daemon.py --simulate --rate 1.0 --api-key
-                trace_dev_gateway_secret_2026
+                python scripts/kavach_gateway_daemon.py --simulate --rate 1.0 --api-key
+                kavach_dev_gateway_secret_2026
               </p>
             </div>
           </div>
@@ -717,7 +717,7 @@ export function DevicesCalibration({
             </div>
           </div>
 
-          <div className="overflow-x-auto max-h-[500px] overflow-y-auto trace-scroll">
+          <div className="overflow-x-auto max-h-[500px] overflow-y-auto kavach-scroll">
             <Table>
               <TableHeader>
                 <TableRow className="text-[10px] uppercase font-mono">
@@ -788,7 +788,7 @@ export function DevicesCalibration({
         <div className="space-y-4">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <div className="panel p-3 bg-card space-y-1">
-              <span className="trace-label text-[9px] text-muted-foreground">CONCENTRATOR STATUS</span>
+              <span className="kavach-label text-[9px] text-muted-foreground">CONCENTRATOR STATUS</span>
               <div className="flex items-center gap-1.5 pt-0.5">
                 <span className={cn("h-2 w-2 rounded-full", k.gatewayConnected ? "bg-success" : "bg-critical")} />
                 <p className="font-bold text-foreground">{k.gatewayConnected ? "ONLINE / LISTENING" : "DISCONNECTED"}</p>
@@ -796,19 +796,19 @@ export function DevicesCalibration({
               <p className="text-[10px] text-muted-foreground">{k.mode === "simulation" ? "Simulated Concentrator GW-01" : "USB Serial /dev/ttyUSB0"}</p>
             </div>
             <div className="panel p-3 bg-card space-y-1">
-              <span className="trace-label text-[9px] text-muted-foreground">RADIO CARRIER</span>
+              <span className="kavach-label text-[9px] text-muted-foreground">RADIO CARRIER</span>
               <p className="font-mono font-bold text-foreground pt-0.5">868.10 MHz (LoRa)</p>
               <p className="text-[10px] text-muted-foreground">Spreading Factor 7 · BW 125 kHz</p>
             </div>
             <div className="panel p-3 bg-card space-y-1">
-              <span className="trace-label text-[9px] text-muted-foreground">UPLINK PACKETS RECV</span>
+              <span className="kavach-label text-[9px] text-muted-foreground">UPLINK PACKETS RECV</span>
               <p className="font-mono font-bold text-primary text-base pt-0.5">
                 {k.nodes.reduce((acc, n) => acc + (n.packetsReceived ?? 0), 0) + (k.detections.length || 142)}
               </p>
               <p className="text-[10px] text-muted-foreground">0 CRC checksum errors</p>
             </div>
             <div className="panel p-3 bg-card space-y-1">
-              <span className="trace-label text-[9px] text-muted-foreground">ASSOCIATED SNIFFERS</span>
+              <span className="kavach-label text-[9px] text-muted-foreground">ASSOCIATED SNIFFERS</span>
               <p className="font-mono font-bold text-emerald-400 text-base pt-0.5">
                 {k.nodes.filter(n => n.type !== "gateway").length} Nodes Linked
               </p>
@@ -829,11 +829,11 @@ export function DevicesCalibration({
                 </div>
                 <div className="flex justify-between py-1 border-b border-border/50">
                   <span className="text-muted-foreground">Firmware Build:</span>
-                  <span className="text-foreground font-bold">firmware/trace_gateway.ino v2.4</span>
+                  <span className="text-foreground font-bold">firmware/kavach_gateway.ino v2.4</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-border/50">
                   <span className="text-muted-foreground">Host Transport Interface:</span>
-                  <span className="text-foreground font-bold">USB UART Serial Bridge (scripts/trace_gateway_daemon.py)</span>
+                  <span className="text-foreground font-bold">USB UART Serial Bridge (scripts/kavach_gateway_daemon.py)</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-border/50">
                   <span className="text-muted-foreground">Ingress REST API:</span>
@@ -1126,7 +1126,7 @@ export function DevicesCalibration({
                 {/* KPI Metrics */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                   <div className="panel p-2.5 bg-background/50">
-                    <p className="trace-label text-[9px]">REFERENCE RSSI (A₀)</p>
+                    <p className="kavach-label text-[9px]">REFERENCE RSSI (A₀)</p>
                     <p className="mono-num text-lg font-bold text-primary mt-0.5">
                       {fitResult.a0.toFixed(1)} dBm
                     </p>
@@ -1134,7 +1134,7 @@ export function DevicesCalibration({
                   </div>
 
                   <div className="panel p-2.5 bg-background/50">
-                    <p className="trace-label text-[9px]">PATH-LOSS EXPONENT (n)</p>
+                    <p className="kavach-label text-[9px]">PATH-LOSS EXPONENT (n)</p>
                     <p className="mono-num text-lg font-bold text-warning mt-0.5">
                       {fitResult.pathLossExponent.toFixed(2)}
                     </p>
@@ -1142,7 +1142,7 @@ export function DevicesCalibration({
                   </div>
 
                   <div className="panel p-2.5 bg-background/50">
-                    <p className="trace-label text-[9px]">GOODNESS-OF-FIT (R²)</p>
+                    <p className="kavach-label text-[9px]">GOODNESS-OF-FIT (R²)</p>
                     <p className="mono-num text-lg font-bold text-foreground mt-0.5">
                       {fitResult.r2.toFixed(2)}
                     </p>
@@ -1150,7 +1150,7 @@ export function DevicesCalibration({
                   </div>
 
                   <div className="panel p-2.5 bg-background/50">
-                    <p className="trace-label text-[9px]">ROOT-MEAN-SQUARE ERROR</p>
+                    <p className="kavach-label text-[9px]">ROOT-MEAN-SQUARE ERROR</p>
                     <p className="mono-num text-lg font-bold text-foreground mt-0.5">
                       {fitResult.rmse.toFixed(1)} dB
                     </p>
@@ -1199,7 +1199,7 @@ export function DevicesCalibration({
                   </span>
                 </div>
 
-                <div className="overflow-x-auto max-h-56 overflow-y-auto trace-scroll">
+                <div className="overflow-x-auto max-h-56 overflow-y-auto kavach-scroll">
                   <Table>
                     <TableHeader>
                       <TableRow className="text-[9px] uppercase font-mono">

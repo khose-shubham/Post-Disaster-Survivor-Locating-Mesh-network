@@ -1,8 +1,8 @@
-# TRACE 2D Multilateration & Localization Model
+# KAVACH 2D Multilateration & Localization Model
 
 ## 1. Overview & System Assumptions
 
-The TRACE localization engine estimates the 2D spatial coordinate of civilian crowd signals using RSSI-derived ranges from distributed sniffer anchors. Because RF signals in collapsed structural environments suffer from severe shadowing, multipath reflections, and non-line-of-sight (NLOS) attenuation, TRACE treats all calculated positions as **probabilistic search-priority areas**, never as confirmed survivor locations.
+The KAVACH localization engine estimates the 2D spatial coordinate of civilian crowd signals using RSSI-derived ranges from distributed sniffer anchors. Because RF signals in collapsed structural environments suffer from severe shadowing, multipath reflections, and non-line-of-sight (NLOS) attenuation, KAVACH treats all calculated positions as **probabilistic search-priority areas**, never as confirmed survivor locations.
 
 ---
 

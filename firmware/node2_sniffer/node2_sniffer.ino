@@ -1,6 +1,6 @@
 /*
  * =====================================================================================
- * TRACE — Triangulated Rescue Aid via Crowd-Signal Estimation
+ * KAVACH — Triangulated Rescue Aid via Crowd-Signal Estimation
  * PHYSICAL IoT FIELD SNIFFER ANCHOR NODE 2 (ESP32 + LoRa + BLE + Wi-Fi)
  *
  * Identity        : NODE-N02 (Sector Delta North-West Anchor)
@@ -109,7 +109,7 @@ void setup() {
 
   Serial.println();
   Serial.println(F("===================================================="));
-  Serial.println(F(" TRACE Field Anchor: NODE-N02 (North-West)"));
+  Serial.println(F(" KAVACH Field Anchor: NODE-N02 (North-West)"));
   Serial.print(F(" Location: Lat ")); Serial.print(NODE_LAT, 6);
   Serial.print(F(", Lon ")); Serial.println(NODE_LON, 6);
   Serial.println(F("===================================================="));

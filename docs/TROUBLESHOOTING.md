@@ -1,21 +1,21 @@
-# TRACE Troubleshooting & Diagnostic Guide
+# KAVACH Troubleshooting & Diagnostic Guide
 
 ## 1. Map & Coordinate Diagnostics
 
 ### Problem: Map markers or search zones appear stretched into ovals
 
 - **Cause**: Non-uniform aspect ratio scaling ($S_x \ne S_y$) was previously used.
-- **Resolution**: TRACE v2.4 employs uniform metric scaling based on local latitude ($S_x = S_y = S$), guaranteeing true geometric circular uncertainty regions.
+- **Resolution**: KAVACH v2.4 employs uniform metric scaling based on local latitude ($S_x = S_y = S$), guaranteeing true geometric circular uncertainty regions.
 
 ### Problem: Map displays "Incident coordinates not configured"
 
 - **Cause**: The active incident record lacks configured latitude and longitude.
-- **Resolution**: Open **Incident History** (`/history`), select the incident, or configure GPS coordinates in the database. TRACE automatically falls back to the reporting nodes' centroid so tactical operations can continue.
+- **Resolution**: Open **Incident History** (`/history`), select the incident, or configure GPS coordinates in the database. KAVACH automatically falls back to the reporting nodes' centroid so tactical operations can continue.
 
 ### Problem: Zero coordinates (0.0, 0.0) discarded
 
 - **Cause**: Falsy checks (`if (lat)`) instead of `typeof lat === "number" && Number.isFinite(lat)`.
-- **Resolution**: TRACE explicitly treats `(0.0, 0.0)` as a valid geographic point (Null Island).
+- **Resolution**: KAVACH explicitly treats `(0.0, 0.0)` as a valid geographic point (Null Island).
 
 ---
 
@@ -30,7 +30,7 @@
   ```
 - **Check 2**: Is the serial bridge daemon running?
   ```bash
-  python scripts/trace_gateway_daemon.py --port COM3 --baud 115200
+  python scripts/kavach_gateway_daemon.py --port COM3 --baud 115200
   ```
 - **Check 3**: Did another application lock the COM port (e.g., Arduino IDE Serial Monitor, Cura)? Close conflicting serial monitors.
 
